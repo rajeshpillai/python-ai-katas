@@ -7,18 +7,19 @@
 - [x] Create CLAUDE.MD
 - [x] Create .gitignore
 - [x] Create todo.md
-- [ ] Set up FastAPI backend project structure
-- [ ] Set up SolidJS frontend project structure
-- [ ] Enforce lowercase-hyphenated file and folder names
+- [x] Set up FastAPI backend project structure
+- [x] Set up SolidJS frontend project structure
+- [x] Enforce lowercase-hyphenated file and folder names
+- [x] Create kata markdown content files (all 50 katas)
 
 ---
 
 ## Landing Page
 
-- [ ] Landing page with two track cards
-- [ ] Foundational AI card (active, links to foundational track)
-- [ ] Traditional AI/ML card (coming soon / disabled until foundational is complete)
-- [ ] Routing from landing page into selected track
+- [x] Landing page with two track cards
+- [x] Foundational AI card (active, links to foundational track)
+- [x] Traditional AI/ML card (coming soon / disabled until foundational is complete)
+- [x] Routing from landing page into selected track
 
 ---
 
@@ -144,25 +145,25 @@
 - [ ] Stream training progress
 - [ ] Visualize tensors and matrices
 - [ ] Show intermediate states
-- [ ] Code and output side-by-side layout
-- [ ] Resizable code and output windows with maximise option
-- [ ] Sidebar with sequence numbers and collapsible burger menu
-- [ ] Dark/light theme toggle with persistent preference
+- [x] Code and output side-by-side layout
+- [x] Resizable code and output windows with maximise option
+- [x] Sidebar with sequence numbers and collapsible burger menu
+- [x] Dark/light theme toggle with persistent preference
 
 ---
 
 ## Backend (FastAPI)
 
 - [ ] Dataset loading
-- [ ] Secure code execution (sandboxed, not in main process)
-- [ ] CPU limits enforcement
-- [ ] Memory limits enforcement
-- [ ] Execution timeout enforcement
+- [x] Secure code execution (sandboxed, not in main process)
+- [x] CPU limits enforcement
+- [x] Memory limits enforcement
+- [x] Execution timeout enforcement
 - [ ] Disable filesystem and network access in sandbox
 - [ ] Return metrics, visual outputs, and educational error messages
-- [ ] Progress tracking
-- [ ] Code versioning
-- [ ] Simple authentication
+- [x] Progress tracking
+- [x] Code versioning
+- [x] Simple authentication
 - [ ] Anonymous users: temporary session, no persistence
 - [ ] Logged-in users: saved progress, restored experiments, version history
 

@@ -1,0 +1,19 @@
+.foundational-ai__welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.foundational-ai__welcome h2 {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+
+.foundational-ai__welcome p {
+  color: var(--text-secondary);
+  max-width: 480px;
+}

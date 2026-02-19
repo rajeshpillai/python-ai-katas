@@ -1,0 +1,134 @@
+.sidebar {
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  transition: width 0.2s;
+  flex-shrink: 0;
+}
+
+.sidebar--expanded {
+  width: 280px;
+}
+
+.sidebar--collapsed {
+  width: 48px;
+}
+
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--sidebar-bg);
+  z-index: 1;
+}
+
+.sidebar__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.sidebar__toggle:hover {
+  background: var(--bg-tertiary);
+}
+
+.sidebar__title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar__nav {
+  padding: 8px 0;
+}
+
+.sidebar__phase {
+  margin-bottom: 4px;
+}
+
+.sidebar__phase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sidebar__phase-header:hover {
+  background: var(--bg-secondary);
+}
+
+.sidebar__phase-arrow {
+  width: 12px;
+  flex-shrink: 0;
+  font-size: 0.7rem;
+}
+
+.sidebar__phase-label {
+  white-space: nowrap;
+}
+
+.sidebar__phase-name {
+  color: var(--text-muted);
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar__kata-list {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar__kata-link {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 6px 12px 6px 30px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.sidebar__kata-link:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.sidebar__kata-link--active {
+  background: var(--accent-light);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.sidebar__kata-seq {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  min-width: 28px;
+  font-variant-numeric: tabular-nums;
+}
+
+.sidebar__kata-link--active .sidebar__kata-seq {
+  color: var(--accent);
+}

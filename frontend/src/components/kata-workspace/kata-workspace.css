@@ -1,0 +1,46 @@
+.kata-workspace {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.kata-workspace__resizable {
+  display: flex;
+  flex: 1;
+}
+
+.kata-workspace__panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.kata-workspace__handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8px;
+  cursor: col-resize;
+  background: transparent;
+  border: none;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.kata-workspace__handle:hover .kata-workspace__handle-bar,
+.kata-workspace__handle:active .kata-workspace__handle-bar {
+  background: var(--handle-hover);
+}
+
+.kata-workspace__handle-bar {
+  width: 3px;
+  height: 40px;
+  border-radius: 3px;
+  background: var(--handle-bg);
+  transition: background 0.15s;
+}
+
+.kata-workspace__maximized {
+  flex: 1;
+  display: flex;
+}

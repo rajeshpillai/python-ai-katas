@@ -1,0 +1,72 @@
+.code-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.code-panel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
+}
+
+.code-panel__title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.code-panel__actions {
+  display: flex;
+  gap: 6px;
+}
+
+.code-panel__btn {
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  transition: background 0.15s;
+}
+
+.code-panel__btn:hover {
+  background: var(--bg-tertiary);
+}
+
+.code-panel__btn--run {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.code-panel__btn--run:hover {
+  background: var(--accent-hover);
+}
+
+.code-panel__btn--icon {
+  padding: 4px 8px;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.code-panel__editor {
+  flex: 1;
+  padding: 16px;
+  border: none;
+  resize: none;
+  background: var(--panel-bg);
+  color: var(--text-primary);
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  tab-size: 4;
+  outline: none;
+}

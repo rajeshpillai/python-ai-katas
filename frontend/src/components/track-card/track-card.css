@@ -1,0 +1,71 @@
+.track-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card-bg);
+  box-shadow: 0 1px 3px var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  flex: 1;
+  min-width: 280px;
+}
+
+.track-card--active {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.track-card--active:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow);
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+.track-card--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.track-card__badge {
+  display: inline-block;
+  width: fit-content;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.track-card__badge--active {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.track-card__badge--coming-soon {
+  background: var(--badge-bg);
+  color: var(--badge-text);
+}
+
+.track-card__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.track-card__description {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.track-card__action {
+  margin-top: auto;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
