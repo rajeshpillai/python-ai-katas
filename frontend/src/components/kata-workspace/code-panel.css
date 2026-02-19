@@ -51,6 +51,11 @@
   background: var(--accent-hover);
 }
 
+.code-panel__btn--run:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .code-panel__btn--icon {
   padding: 4px 8px;
   font-size: 1rem;

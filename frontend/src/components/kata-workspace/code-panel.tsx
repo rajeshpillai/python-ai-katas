@@ -1,12 +1,15 @@
-import { createSignal } from "solid-js";
+import { createSignal, createEffect } from "solid-js";
 import "./code-panel.css";
 
 interface CodePanelProps {
   maximized: boolean;
   onToggleMaximize: () => void;
+  onRun: (code: string) => void;
+  running: boolean;
+  defaultCode?: string;
 }
 
-const DEFAULT_CODE = `# Write your Python code here
+const FALLBACK_CODE = `# Write your Python code here
 import numpy as np
 
 x = np.array([1, 2, 3, 4, 5])
@@ -15,16 +18,29 @@ print("Mean:", x.mean())
 `;
 
 export default function CodePanel(props: CodePanelProps) {
-  const [code, setCode] = createSignal(DEFAULT_CODE);
+  const initialCode = () => props.defaultCode ?? FALLBACK_CODE;
+  const [code, setCode] = createSignal(initialCode());
 
-  const handleReset = () => setCode(DEFAULT_CODE);
+  createEffect(() => {
+    const dc = props.defaultCode;
+    if (dc) setCode(dc);
+  });
+
+  const handleReset = () => setCode(initialCode());
+  const handleRun = () => props.onRun(code());
 
   return (
     <div class="code-panel">
       <div class="code-panel__header">
         <span class="code-panel__title">Code</span>
         <div class="code-panel__actions">
-          <button class="code-panel__btn code-panel__btn--run">Run</button>
+          <button
+            class="code-panel__btn code-panel__btn--run"
+            onClick={handleRun}
+            disabled={props.running}
+          >
+            {props.running ? "Running..." : "Run"}
+          </button>
           <button class="code-panel__btn" onClick={handleReset}>
             Reset
           </button>
@@ -42,6 +58,12 @@ export default function CodePanel(props: CodePanelProps) {
         class="code-panel__editor"
         value={code()}
         onInput={(e) => setCode(e.currentTarget.value)}
+        onKeyDown={(e) => {
+          if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+            e.preventDefault();
+            handleRun();
+          }
+        }}
         spellcheck={false}
       />
     </div>

@@ -1,8 +1,13 @@
+from pathlib import Path
+
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import PlainTextResponse
 
 from app.models.kata import Kata, KataList
 
 router = APIRouter()
+
+CONTENT_DIR = Path(__file__).resolve().parents[3] / "content"
 
 FOUNDATIONAL_KATAS: list[dict] = [
     # Phase 0 — Foundations
@@ -91,3 +96,28 @@ async def list_katas(track_id: str):
     if track_id == "traditional-ai-ml":
         raise HTTPException(status_code=404, detail="Traditional AI/ML track is coming soon")
     raise HTTPException(status_code=404, detail=f"Track '{track_id}' not found")
+
+
+@router.get("/tracks/{track_id}/katas/{phase_id}/{kata_id}/content", response_class=PlainTextResponse)
+async def get_kata_content(track_id: str, phase_id: int, kata_id: str):
+    if track_id != "foundational-ai":
+        raise HTTPException(status_code=404, detail=f"Track '{track_id}' not found")
+
+    # Find the kata to get its sequence number
+    kata = next(
+        (k for k in FOUNDATIONAL_KATAS if k["id"] == kata_id and k["phase"] == phase_id),
+        None,
+    )
+    if not kata:
+        raise HTTPException(status_code=404, detail=f"Kata '{kata_id}' not found in phase {phase_id}")
+
+    # Look for the markdown file
+    phase_dir = CONTENT_DIR / track_id / f"phase-{phase_id}"
+    seq = kata["sequence"]
+    filename = f"{seq:02d}-{kata_id}.md"
+    filepath = phase_dir / filename
+
+    if not filepath.exists():
+        raise HTTPException(status_code=404, detail=f"Content file not found: {filename}")
+
+    return filepath.read_text(encoding="utf-8")

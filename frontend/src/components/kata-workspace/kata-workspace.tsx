@@ -2,12 +2,52 @@ import { createSignal, Show } from "solid-js";
 import Resizable from "@corvu/resizable";
 import CodePanel from "./code-panel";
 import OutputPanel from "./output-panel";
+import { apiPost } from "../../lib/api-client";
 import "./kata-workspace.css";
 
 type MaximizedPanel = "code" | "output" | null;
 
-export default function KataWorkspace() {
+interface ExecutionResult {
+  stdout: string;
+  stderr: string;
+  error: string | null;
+  execution_time_ms: number;
+  metrics: Record<string, unknown>;
+  plots: unknown[];
+}
+
+interface KataWorkspaceProps {
+  kataId?: string;
+  defaultCode?: string;
+}
+
+export default function KataWorkspace(props: KataWorkspaceProps) {
   const [maximized, setMaximized] = createSignal<MaximizedPanel>(null);
+  const [output, setOutput] = createSignal<ExecutionResult | null>(null);
+  const [running, setRunning] = createSignal(false);
+
+  const handleRun = async (code: string) => {
+    setRunning(true);
+    setOutput(null);
+    try {
+      const result = await apiPost<ExecutionResult>("/execute", {
+        code,
+        kata_id: props.kataId ?? "unknown",
+      });
+      setOutput(result);
+    } catch (e) {
+      setOutput({
+        stdout: "",
+        stderr: "",
+        error: e instanceof Error ? e.message : "Unknown error",
+        execution_time_ms: 0,
+        metrics: {},
+        plots: [],
+      });
+    } finally {
+      setRunning(false);
+    }
+  };
 
   const toggleMaximize = (panel: "code" | "output") => {
     setMaximized((prev) => (prev === panel ? null : panel));
@@ -23,12 +63,17 @@ export default function KataWorkspace() {
               <CodePanel
                 maximized={true}
                 onToggleMaximize={() => toggleMaximize("code")}
+                onRun={handleRun}
+                running={running()}
+                defaultCode={props.defaultCode}
               />
             </Show>
             <Show when={maximized() === "output"}>
               <OutputPanel
                 maximized={true}
                 onToggleMaximize={() => toggleMaximize("output")}
+                output={output()}
+                running={running()}
               />
             </Show>
           </div>
@@ -43,6 +88,9 @@ export default function KataWorkspace() {
             <CodePanel
               maximized={false}
               onToggleMaximize={() => toggleMaximize("code")}
+              onRun={handleRun}
+              running={running()}
+              defaultCode={props.defaultCode}
             />
           </Resizable.Panel>
           <Resizable.Handle
@@ -59,6 +107,8 @@ export default function KataWorkspace() {
             <OutputPanel
               maximized={false}
               onToggleMaximize={() => toggleMaximize("output")}
+              output={output()}
+              running={running()}
             />
           </Resizable.Panel>
         </Resizable>
