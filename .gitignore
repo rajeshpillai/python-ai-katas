@@ -1,0 +1,37 @@
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+env/
+
+# pytorch / ml
+*.pth
+*.pt
+*.onnx
+*.pkl
+datasets/
+
+# fastapi
+*.db
+
+# solidjs / node
+node_modules/
+.solid/
+dist/
+
+# env / secrets
+.env
+.env.*
+
+# ide
+.vscode/
+.idea/
+
+# os
+.DS_Store
+Thumbs.db
