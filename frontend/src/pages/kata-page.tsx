@@ -83,7 +83,11 @@ export default function KataPage() {
           </div>
         </Show>
         <Show when={activeTab() === "code"}>
-          <KataWorkspace kataId={params.kataId} defaultCode={starterCode()} />
+          <KataWorkspace
+            kataId={params.kataId}
+            cacheKey={`${trackId()}/${params.phaseId}/${params.kataId}`}
+            defaultCode={starterCode()}
+          />
         </Show>
       </div>
     </div>

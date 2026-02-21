@@ -1,4 +1,4 @@
-import { createSignal, Show } from "solid-js";
+import { createSignal, createEffect, on, Show } from "solid-js";
 import Resizable from "@corvu/resizable";
 import CodePanel from "./code-panel";
 import OutputPanel from "./output-panel";
@@ -13,8 +13,11 @@ const PLOT_RE = /__KATA_PLOT_(\d+)__:(.*):__END_KATA_PLOT__/;
 const METRIC_RE = /__KATA_METRIC__:(.*?):(.*?):__END_KATA_METRIC__/;
 const TENSOR_RE = /__KATA_TENSOR__:(.*):__END_KATA_TENSOR__/;
 
+const outputCache = new Map<string, ExecutionResult | null>();
+
 interface KataWorkspaceProps {
   kataId?: string;
+  cacheKey?: string;
   defaultCode?: string;
 }
 
@@ -23,6 +26,28 @@ export default function KataWorkspace(props: KataWorkspaceProps) {
   const [output, setOutput] = createSignal<ExecutionResult | null>(null);
   const [running, setRunning] = createSignal(false);
   const [streaming, setStreaming] = createSignal(false);
+
+  // Save/restore output when navigating between katas
+  createEffect(
+    on(
+      () => props.cacheKey,
+      (key, prevKey) => {
+        if (prevKey !== undefined) {
+          outputCache.set(prevKey, output());
+        }
+        setOutput(key ? (outputCache.get(key) ?? null) : null);
+      },
+    ),
+  );
+
+  // Keep cache in sync after each execution
+  createEffect(() => {
+    const result = output();
+    const key = props.cacheKey;
+    if (key && result) {
+      outputCache.set(key, result);
+    }
+  });
 
   const emptyResult = (): ExecutionResult => ({
     stdout: "",
