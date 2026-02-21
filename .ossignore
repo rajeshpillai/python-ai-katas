@@ -1,5 +1,7 @@
 # Files to exclude from the OSS (prompt-free) repository
 CLAUDE.MD
 todo.md
+backend/python/todo.md
+backend/rust/todo.md
 .ossignore
 scripts/

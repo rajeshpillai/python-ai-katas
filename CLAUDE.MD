@@ -5,15 +5,31 @@ Every model — linear regression, CNN, Transformer, LLM — must be explained t
 
 ## Application Structure
 
+```
+python-ai-katas/
+├── backend/
+│   ├── python/          ← FastAPI backend + content for Python katas
+│   │   ├── main.py
+│   │   ├── requirements.txt
+│   │   ├── app/         ← Routes, models, services, middleware
+│   │   └── content/     ← Markdown kata files (foundational-ai/, traditional-ai-ml/)
+│   └── rust/            ← Placeholder for Rust katas backend
+├── frontend/            ← SolidJS frontend (shared across all backends)
+├── todo.md              ← High-level agenda (per-backend details in backend/*/todo.md)
+└── scripts/             ← Utility scripts (OSS publish, etc.)
+```
+
 The app has a **landing page** with two track cards:
 
 ### 1. Foundational AI (Active)
-Covers Phases 0–9 below. This is the current focus and must be built first.
+Covers Phases 0–9 below.
 
-### 2. Traditional AI/ML (Deferred)
-Covers classical AI, supervised learning, unsupervised learning, reinforcement learning, and traditional ML algorithms (decision trees, SVMs, k-means, etc.). **This track will be designed and built after the Foundational AI track is complete.**
+### 2. Traditional AI/ML (Active)
+Covers classical AI, supervised learning, unsupervised learning, reinforcement learning, and traditional ML algorithms (decision trees, SVMs, k-means, etc.).
 
 The landing page routes into the selected track. Each track has its own sidebar, kata sequence, and progress tracking.
+
+The **frontend is shared** — any backend (Python, Rust, etc.) exposes the same API shape, so the same UI works seamlessly with any backend.
 
 ---
 

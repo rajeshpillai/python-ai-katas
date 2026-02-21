@@ -7,7 +7,7 @@ from app.models.kata import Kata, KataList
 
 router = APIRouter()
 
-CONTENT_DIR = Path(__file__).resolve().parents[3] / "content"
+CONTENT_DIR = Path(__file__).resolve().parents[2] / "content"
 
 FOUNDATIONAL_KATAS: list[dict] = [
     # Phase 0 — Foundations
