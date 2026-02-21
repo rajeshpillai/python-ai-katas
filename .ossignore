@@ -1,0 +1,5 @@
+# Files to exclude from the OSS (prompt-free) repository
+CLAUDE.MD
+todo.md
+.ossignore
+scripts/
