@@ -1,4 +1,6 @@
-import { createSignal, createEffect } from "solid-js";
+import { createSignal, createMemo, createEffect, Show } from "solid-js";
+import { parseSliderConfigs, applySliderValues } from "../../lib/slider-config";
+import SliderBar from "./slider-bar";
 import "./code-panel.css";
 
 interface CodePanelProps {
@@ -20,14 +22,33 @@ print("Mean:", x.mean())
 export default function CodePanel(props: CodePanelProps) {
   const initialCode = () => props.defaultCode ?? FALLBACK_CODE;
   const [code, setCode] = createSignal(initialCode());
+  const [sliderValues, setSliderValues] = createSignal<Record<string, number>>(
+    {},
+  );
 
   createEffect(() => {
     const dc = props.defaultCode;
-    if (dc) setCode(dc);
+    if (dc) {
+      setCode(dc);
+      setSliderValues({});
+    }
   });
 
-  const handleReset = () => setCode(initialCode());
-  const handleRun = () => props.onRun(code());
+  const sliderConfigs = createMemo(() => parseSliderConfigs(code()));
+
+  const handleReset = () => {
+    setCode(initialCode());
+    setSliderValues({});
+  };
+
+  const handleRun = () => {
+    const configs = sliderConfigs();
+    const finalCode =
+      configs.length > 0
+        ? applySliderValues(code(), configs, sliderValues())
+        : code();
+    props.onRun(finalCode);
+  };
 
   return (
     <div class="code-panel">
@@ -54,6 +75,15 @@ export default function CodePanel(props: CodePanelProps) {
           </button>
         </div>
       </div>
+      <Show when={sliderConfigs().length > 0}>
+        <SliderBar
+          configs={sliderConfigs()}
+          values={sliderValues()}
+          onChange={(name, value) =>
+            setSliderValues((prev) => ({ ...prev, [name]: value }))
+          }
+        />
+      </Show>
       <textarea
         class="code-panel__editor"
         value={code()}

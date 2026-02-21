@@ -108,6 +108,7 @@ for name, w, b, y in [("AND", w_and, b_and, AND_y), ("OR", w_or, b_or, OR_y)]:
 
 # --- Train a neuron on AND, OR, and XOR ---
 print("=== Training a neuron via gradient descent ===\n")
+# @param lr float 0.01 5.0 0.5 0.01
 lr = 0.5
 for name, y_true in [("AND", AND_y), ("OR", OR_y), ("XOR", XOR_y)]:
     w = np.random.randn(2) * 0.5

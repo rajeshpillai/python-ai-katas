@@ -8,13 +8,17 @@ interface MarkdownContentProps {
 function parseMarkdown(md: string): string {
   let html = md;
 
-  // Code blocks (``` ... ```)
+  // Step 1: Extract code blocks into placeholders so later regexes
+  // (headers, lists, etc.) cannot corrupt content inside them.
+  const codeBlocks: string[] = [];
   html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (_match, lang, code) => {
     const escaped = code
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;");
-    return `<pre class="md-code-block"><code class="language-${lang}">${escaped}</code></pre>`;
+    const block = `<pre class="md-code-block"><code class="language-${lang}">${escaped}</code></pre>`;
+    codeBlocks.push(block);
+    return `\n__CODE_BLOCK_${codeBlocks.length - 1}__\n`;
   });
 
   // Inline code
@@ -43,11 +47,16 @@ function parseMarkdown(md: string): string {
     '<ul class="md-ul">$1</ul>$2'
   );
 
-  // Paragraphs: wrap remaining non-tag lines
+  // Paragraphs: wrap remaining non-tag, non-placeholder lines
   html = html.replace(
-    /^(?!<[a-z/]|$)(.+)$/gm,
+    /^(?!<[a-z/]|__CODE_BLOCK_|$)(.+)$/gm,
     '<p class="md-p">$1</p>'
   );
+
+  // Step 2: Restore code blocks from placeholders
+  html = html.replace(/__CODE_BLOCK_(\d+)__/g, (_match, idx) => {
+    return codeBlocks[parseInt(idx)];
+  });
 
   return html;
 }

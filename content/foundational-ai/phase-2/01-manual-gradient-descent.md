@@ -73,7 +73,9 @@ y_true = 2 * X + 1 + np.random.randn(20) * 0.5
 # --- Initialize parameters (bad guess) ---
 m = 0.0
 b = 0.0
+# @param lr float 0.001 0.1 0.01 0.001
 lr = 0.01   # learning rate
+# @param epochs int 10 200 60 10
 epochs = 60
 n = len(X)
 

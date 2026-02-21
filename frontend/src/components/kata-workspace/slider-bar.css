@@ -1,0 +1,39 @@
+.slider-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
+}
+
+.slider-bar__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 200px;
+}
+
+.slider-bar__label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.slider-bar__input {
+  flex: 1;
+  height: 4px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.slider-bar__value {
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+  color: var(--accent);
+  min-width: 48px;
+  text-align: right;
+}

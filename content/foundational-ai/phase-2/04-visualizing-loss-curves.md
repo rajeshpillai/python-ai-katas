@@ -100,11 +100,17 @@ def text_plot(losses, title, width=50, height=12):
     print(f"          +{''.join(['-'] * len(sampled))}")
     print(f"           Epoch 0{' ' * (len(sampled) - 10)}Epoch {len(losses)-1}")
 
-# --- Compare three scenarios ---
+# --- Compare three scenarios + your custom run ---
+# @param my_lr float 0.001 0.1 0.015 0.001
+my_lr = 0.015
+# @param my_epochs int 10 300 100 10
+my_epochs = 100
+
 configs = [
     (0.001, 100, "Slow (lr=0.001, 100 epochs)"),
     (0.015, 100, "Good (lr=0.015, 100 epochs)"),
     (0.015,  30, "Short (lr=0.015, 30 epochs)"),
+    (my_lr, my_epochs, f"Your run (lr={my_lr}, {my_epochs} epochs)"),
 ]
 
 for lr, epochs, title in configs:

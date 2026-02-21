@@ -65,6 +65,9 @@ X = np.linspace(0, 5, 20)
 y_true = 2 * X + 1 + np.random.randn(20) * 0.5
 n = len(X)
 
+# @param custom_lr float 0.0001 1.0 0.01 0.001
+custom_lr = 0.01
+
 def train(lr, epochs=80):
     """Run gradient descent and return loss history."""
     m, b = 0.0, 0.0
@@ -77,9 +80,9 @@ def train(lr, epochs=80):
         b -= lr * (2 / n) * np.sum(error)
     return losses, m, b
 
-# --- Compare three learning rates ---
-rates = [0.0001, 0.01, 0.5]
-labels = ["Too small", "Just right", "Too large"]
+# --- Compare three learning rates + your custom rate ---
+rates = [0.0001, 0.01, 0.5, custom_lr]
+labels = ["Too small", "Just right", "Too large", f"Your choice ({custom_lr})"]
 
 for lr, label in zip(rates, labels):
     losses, m, b = train(lr)

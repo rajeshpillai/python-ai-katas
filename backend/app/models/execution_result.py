@@ -11,5 +11,6 @@ class ExecutionResult(BaseModel):
     stderr: str = ""
     metrics: dict = {}
     plots: list = []
+    tensors: list = []
     error: str | None = None
     execution_time_ms: float = 0.0

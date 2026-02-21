@@ -24,6 +24,7 @@
 
 .output-panel__actions {
   display: flex;
+  align-items: center;
   gap: 6px;
 }
 
@@ -34,6 +35,7 @@
   background: var(--bg-primary);
   color: var(--text-primary);
   font-size: 0.8rem;
+  cursor: pointer;
   transition: background 0.15s;
 }
 
@@ -47,6 +49,23 @@
   line-height: 1;
 }
 
+.output-panel__btn--stream {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.output-panel__btn--active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.output-panel__btn--active:hover {
+  background: var(--accent-hover);
+}
+
 .output-panel__content {
   flex: 1;
   display: flex;
@@ -55,24 +74,37 @@
 }
 
 .output-panel__terminal {
-  flex: 1;
   padding: 16px;
   font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
   font-size: 0.85rem;
   line-height: 1.6;
   background: var(--panel-bg);
-  border-bottom: 1px solid var(--border);
-  min-height: 100px;
+  min-height: 60px;
 }
 
 .output-panel__viz {
-  flex: 1;
   padding: 16px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
   background: var(--panel-bg);
-  min-height: 100px;
+  border-top: 1px solid var(--border);
+}
+
+.output-panel__plot {
+  flex: 1 1 auto;
+  min-width: 280px;
+  max-width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.output-panel__plot-img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .output-panel__placeholder {
@@ -110,4 +142,58 @@
   white-space: pre-wrap;
   word-break: break-word;
   color: var(--error);
+}
+
+/* --- Tensor heatmap --- */
+
+.output-panel__tensors {
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: var(--panel-bg);
+  border-top: 1px solid var(--border);
+}
+
+.output-panel__tensor {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.output-panel__tensor-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.output-panel__tensor-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.output-panel__tensor-shape {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+}
+
+.output-panel__tensor-grid {
+  display: inline-grid;
+  gap: 1px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.output-panel__tensor-cell {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
 }
