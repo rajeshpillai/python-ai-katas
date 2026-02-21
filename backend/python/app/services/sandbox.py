@@ -1,5 +1,6 @@
 import re
 import subprocess
+import sys
 import time
 
 from app.config import settings
@@ -51,7 +52,7 @@ async def execute_code(code: str, kata_id: str) -> ExecutionResult:
     start = time.perf_counter()
     try:
         result = subprocess.run(
-            ["python", "-c", full_code],
+            [sys.executable, "-c", full_code],
             capture_output=True,
             text=True,
             timeout=settings.sandbox_timeout_seconds,

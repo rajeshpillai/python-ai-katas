@@ -41,5 +41,7 @@
 - See [backend/python/todo.md](backend/python/todo.md) for details
 
 ### Rust (`backend/rust/`)
-- [ ] Rust backend — not started
+- [x] Rust backend — fully operational (Axum, port 8001)
+- [x] Foundational AI track — 50 katas (10 phases)
+- [x] Traditional AI/ML track — 75 katas (12 phases)
 - See [backend/rust/todo.md](backend/rust/todo.md) for details

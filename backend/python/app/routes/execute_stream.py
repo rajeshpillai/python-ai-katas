@@ -1,6 +1,7 @@
 import asyncio
 import os
 import subprocess
+import sys
 import time
 
 from fastapi import APIRouter
@@ -20,7 +21,7 @@ async def stream_code(request: ExecutionRequest):
     async def event_generator():
         start = time.perf_counter()
         proc = subprocess.Popen(
-            ["python", "-u", "-c", full_code],
+            [sys.executable, "-u", "-c", full_code],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,

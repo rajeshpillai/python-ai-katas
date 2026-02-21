@@ -26,9 +26,11 @@ export default function Sidebar(props: SidebarProps) {
   );
   const params = useParams();
 
+  const lang = () => params.lang ?? "python";
+
   const [data] = createResource(
-    () => props.trackId,
-    (trackId) => apiGet<KatasResponse>(`/tracks/${trackId}/katas`)
+    () => ({ trackId: props.trackId, lang: lang() }),
+    (source) => apiGet<KatasResponse>(`/tracks/${source.trackId}/katas`, source.lang)
   );
 
   const trackTitle = () => {
@@ -108,7 +110,7 @@ export default function Sidebar(props: SidebarProps) {
                       {(kata) => (
                         <li>
                           <A
-                            href={`/${props.trackId}/${kata.phase}/${kata.id}`}
+                            href={`/${lang()}/${props.trackId}/${kata.phase}/${kata.id}`}
                             class="sidebar__kata-link"
                             classList={{
                               "sidebar__kata-link--active":

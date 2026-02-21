@@ -6,9 +6,15 @@ export default defineConfig({
   server: {
     port: 3000,
     proxy: {
-      "/api": {
+      "/api/python": {
         target: "http://localhost:8000",
         changeOrigin: true,
+        rewrite: (path) => path.replace("/api/python", "/api"),
+      },
+      "/api/rust": {
+        target: "http://localhost:8001",
+        changeOrigin: true,
+        rewrite: (path) => path.replace("/api/rust", "/api"),
       },
     },
   },

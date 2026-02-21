@@ -8,11 +8,11 @@ import "./kata-page.css";
 
 type Tab = "concept" | "code";
 
-function extractCodeFromMarkdown(md: string): string | undefined {
+function extractCodeFromMarkdown(md: string, lang: string): string | undefined {
   const liveCodeIdx = md.indexOf("## Live Code");
   if (liveCodeIdx === -1) return undefined;
   const after = md.slice(liveCodeIdx);
-  const codeBlockMatch = after.match(/```python\n([\s\S]*?)```/);
+  const codeBlockMatch = after.match(new RegExp("```" + lang + "\\n([\\s\\S]*?)```"));
   return codeBlockMatch ? codeBlockMatch[1].trimEnd() + "\n" : undefined;
 }
 
@@ -21,23 +21,25 @@ export default function KataPage() {
   const location = useLocation();
   const [activeTab, setActiveTab] = createSignal<Tab>("concept");
 
-  const trackId = () => location.pathname.split("/")[1] ?? "foundational-ai";
+  const lang = () => params.lang ?? "python";
+  const trackId = () => location.pathname.split("/")[2] ?? "foundational-ai";
   const phaseNum = () => parseInt(params.phaseId ?? "0", 10);
   const phaseName = () => PHASE_NAMES[trackId()]?.[phaseNum()] ?? "";
   const kataId = () => (params.kataId ?? "").replace(/-/g, " ");
 
   const [content] = createResource(
-    () => ({ trackId: trackId(), phaseId: params.phaseId, kataId: params.kataId }),
+    () => ({ trackId: trackId(), phaseId: params.phaseId, kataId: params.kataId, lang: lang() }),
     (source) =>
       apiGetText(
-        `/tracks/${source.trackId}/katas/${source.phaseId}/${source.kataId}/content`
+        `/tracks/${source.trackId}/katas/${source.phaseId}/${source.kataId}/content`,
+        source.lang
       ).catch(() => null)
   );
 
   const starterCode = createMemo(() => {
     const md = content();
     if (!md) return undefined;
-    return extractCodeFromMarkdown(md);
+    return extractCodeFromMarkdown(md, lang());
   });
 
   return (
@@ -85,7 +87,8 @@ export default function KataPage() {
         <Show when={activeTab() === "code"}>
           <KataWorkspace
             kataId={params.kataId}
-            cacheKey={`${trackId()}/${params.phaseId}/${params.kataId}`}
+            lang={lang()}
+            cacheKey={`${lang()}/${trackId()}/${params.phaseId}/${params.kataId}`}
             defaultCode={starterCode()}
           />
         </Show>

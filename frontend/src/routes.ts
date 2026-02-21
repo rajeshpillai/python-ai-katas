@@ -1,7 +1,8 @@
 export const ROUTES = {
   LANDING: "/",
-  FOUNDATIONAL_AI: "/foundational-ai",
-  KATA: "/foundational-ai/:phaseId/:kataId",
-  TRADITIONAL_AI_ML: "/traditional-ai-ml",
-  TRADITIONAL_KATA: "/traditional-ai-ml/:phaseId/:kataId",
+  LANGUAGE: "/:lang",
+  FOUNDATIONAL_AI: "/:lang/foundational-ai",
+  KATA: "/:lang/foundational-ai/:phaseId/:kataId",
+  TRADITIONAL_AI_ML: "/:lang/traditional-ai-ml",
+  TRADITIONAL_KATA: "/:lang/traditional-ai-ml/:phaseId/:kataId",
 } as const;

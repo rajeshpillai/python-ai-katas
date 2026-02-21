@@ -13,10 +13,11 @@ export interface SSECallbacks {
 export async function executeStream(
   code: string,
   kataId: string,
+  lang: string,
   callbacks: SSECallbacks,
   signal?: AbortSignal,
 ): Promise<void> {
-  const res = await fetch(`${API_BASE}/execute/stream`, {
+  const res = await fetch(`${API_BASE}/${lang}/execute/stream`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ code, kata_id: kataId }),

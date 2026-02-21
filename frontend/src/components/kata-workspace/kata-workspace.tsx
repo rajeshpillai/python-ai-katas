@@ -17,6 +17,7 @@ const outputCache = new Map<string, ExecutionResult | null>();
 
 interface KataWorkspaceProps {
   kataId?: string;
+  lang: string;
   cacheKey?: string;
   defaultCode?: string;
 }
@@ -66,7 +67,7 @@ export default function KataWorkspace(props: KataWorkspaceProps) {
     if (streaming()) {
       setOutput(emptyResult());
       try {
-        await executeStream(code, props.kataId ?? "unknown", {
+        await executeStream(code, props.kataId ?? "unknown", props.lang, {
           onStdout: (line) => {
             setOutput((prev) =>
               prev ? { ...prev, stdout: prev.stdout + line + "\n" } : prev,
@@ -149,7 +150,7 @@ export default function KataWorkspace(props: KataWorkspaceProps) {
         const result = await apiPost<ExecutionResult>("/execute", {
           code,
           kata_id: props.kataId ?? "unknown",
-        });
+        }, props.lang);
         setOutput(result);
       } catch (e) {
         setOutput({

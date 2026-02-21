@@ -1,6 +1,21 @@
 export const THEME_STORAGE_KEY = "theme";
 export const API_BASE = "/api";
 
+export const LANGUAGES = [
+  {
+    id: "python",
+    name: "Python",
+    description:
+      "NumPy, PyTorch, scikit-learn, and matplotlib — the most popular AI/ML ecosystem.",
+  },
+  {
+    id: "rust",
+    name: "Rust",
+    description:
+      "High-performance, safe AI/ML with ndarray, tch-rs, and zero-cost abstractions.",
+  },
+] as const;
+
 export const TRACKS = {
   FOUNDATIONAL_AI: {
     id: "foundational-ai",
