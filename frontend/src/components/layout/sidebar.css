@@ -48,6 +48,24 @@
   font-size: 0.9rem;
   white-space: nowrap;
   overflow: hidden;
+  flex: 1;
+}
+
+.sidebar__home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.sidebar__home:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
 }
 
 .sidebar__nav {
