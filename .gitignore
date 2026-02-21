@@ -16,6 +16,10 @@ env/
 *.pkl
 datasets/
 
+# rust
+target/
+*.rlib
+
 # fastapi
 *.db
 
