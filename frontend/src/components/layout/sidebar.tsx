@@ -1,7 +1,6 @@
 import { createSignal, createResource, For, Show } from "solid-js";
 import { A, useParams } from "@solidjs/router";
 import { apiGet } from "../../lib/api-client";
-import { PHASE_NAMES } from "../../lib/constants";
 import "./sidebar.css";
 
 interface KataItem {
@@ -16,16 +15,30 @@ interface KatasResponse {
   phases: Record<string, string>;
 }
 
-export default function Sidebar() {
+interface SidebarProps {
+  trackId: string;
+}
+
+export default function Sidebar(props: SidebarProps) {
   const [expanded, setExpanded] = createSignal(true);
   const [collapsedPhases, setCollapsedPhases] = createSignal<Set<number>>(
     new Set()
   );
   const params = useParams();
 
-  const [data] = createResource(() =>
-    apiGet<KatasResponse>("/tracks/foundational-ai/katas")
+  const [data] = createResource(
+    () => props.trackId,
+    (trackId) => apiGet<KatasResponse>(`/tracks/${trackId}/katas`)
   );
+
+  const trackTitle = () => {
+    const id = props.trackId;
+    if (id === "foundational-ai") return "Foundational AI";
+    if (id === "traditional-ai-ml") return "Traditional AI/ML";
+    return id;
+  };
+
+  const phaseNames = () => data()?.phases ?? {};
 
   const phases = () => {
     const katas = data()?.katas ?? [];
@@ -61,7 +74,7 @@ export default function Sidebar() {
           </svg>
         </button>
         <Show when={expanded()}>
-          <span class="sidebar__title">Foundational AI</span>
+          <span class="sidebar__title">{trackTitle()}</span>
         </Show>
       </div>
       <Show when={expanded()}>
@@ -80,7 +93,7 @@ export default function Sidebar() {
                     Phase {phase}
                   </span>
                   <span class="sidebar__phase-name">
-                    {PHASE_NAMES[phase] ?? ""}
+                    {phaseNames()[phase] ?? ""}
                   </span>
                 </button>
                 <Show when={!collapsedPhases().has(phase)}>
@@ -89,7 +102,7 @@ export default function Sidebar() {
                       {(kata) => (
                         <li>
                           <A
-                            href={`/foundational-ai/${kata.phase}/${kata.id}`}
+                            href={`/${props.trackId}/${kata.phase}/${kata.id}`}
                             class="sidebar__kata-link"
                             classList={{
                               "sidebar__kata-link--active":

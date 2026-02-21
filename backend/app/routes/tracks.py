@@ -15,7 +15,7 @@ TRACKS = [
         "name": "Traditional AI/ML",
         "description": "Classical AI, supervised and unsupervised learning, "
         "reinforcement learning, and traditional ML algorithms.",
-        "status": "coming-soon",
+        "status": "active",
     },
 ]
 

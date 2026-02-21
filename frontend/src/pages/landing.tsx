@@ -26,7 +26,8 @@ export default function Landing() {
           <TrackCard
             title={TRACKS.TRADITIONAL_AI_ML.name}
             description={TRACKS.TRADITIONAL_AI_ML.description}
-            status="coming-soon"
+            status="active"
+            href={ROUTES.TRADITIONAL_AI_ML}
           />
         </div>
       </main>

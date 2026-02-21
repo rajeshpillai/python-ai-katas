@@ -64,14 +64,14 @@
 
 .code-panel__editor {
   flex: 1;
-  padding: 16px;
-  border: none;
-  resize: none;
-  background: var(--panel-bg);
-  color: var(--text-primary);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.code-panel__editor .cm-editor {
+  height: 100%;
+}
+
+.code-panel__editor .cm-scroller {
   font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  tab-size: 4;
-  outline: none;
 }

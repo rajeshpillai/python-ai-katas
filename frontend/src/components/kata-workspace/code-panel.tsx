@@ -1,5 +1,6 @@
 import { createSignal, createMemo, createEffect, Show } from "solid-js";
 import { parseSliderConfigs, applySliderValues } from "../../lib/slider-config";
+import { createCodeMirror } from "../../lib/create-codemirror";
 import SliderBar from "./slider-bar";
 import "./code-panel.css";
 
@@ -26,21 +27,6 @@ export default function CodePanel(props: CodePanelProps) {
     {},
   );
 
-  createEffect(() => {
-    const dc = props.defaultCode;
-    if (dc) {
-      setCode(dc);
-      setSliderValues({});
-    }
-  });
-
-  const sliderConfigs = createMemo(() => parseSliderConfigs(code()));
-
-  const handleReset = () => {
-    setCode(initialCode());
-    setSliderValues({});
-  };
-
   const handleRun = () => {
     const configs = sliderConfigs();
     const finalCode =
@@ -48,6 +34,30 @@ export default function CodePanel(props: CodePanelProps) {
         ? applySliderValues(code(), configs, sliderValues())
         : code();
     props.onRun(finalCode);
+  };
+
+  const { ref: editorRef, setCode: setEditorCode } = createCodeMirror({
+    code,
+    onCodeChange: setCode,
+    onCtrlEnter: handleRun,
+  });
+
+  createEffect(() => {
+    const dc = props.defaultCode;
+    if (dc) {
+      setCode(dc);
+      setEditorCode(dc);
+      setSliderValues({});
+    }
+  });
+
+  const sliderConfigs = createMemo(() => parseSliderConfigs(code()));
+
+  const handleReset = () => {
+    const ic = initialCode();
+    setCode(ic);
+    setEditorCode(ic);
+    setSliderValues({});
   };
 
   return (
@@ -84,18 +94,7 @@ export default function CodePanel(props: CodePanelProps) {
           }
         />
       </Show>
-      <textarea
-        class="code-panel__editor"
-        value={code()}
-        onInput={(e) => setCode(e.currentTarget.value)}
-        onKeyDown={(e) => {
-          if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
-            e.preventDefault();
-            handleRun();
-          }
-        }}
-        spellcheck={false}
-      />
+      <div ref={editorRef} class="code-panel__editor" />
     </div>
   );
 }

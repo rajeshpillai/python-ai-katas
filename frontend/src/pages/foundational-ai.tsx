@@ -4,7 +4,7 @@ import "./foundational-ai.css";
 
 const FoundationalAi: ParentComponent = (props) => {
   return (
-    <MainLayout>
+    <MainLayout trackId="foundational-ai">
       {props.children}
     </MainLayout>
   );

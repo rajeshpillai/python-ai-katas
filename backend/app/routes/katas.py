@@ -72,7 +72,97 @@ FOUNDATIONAL_KATAS: list[dict] = [
     {"id": "failure-modes-of-llm-reasoning", "title": "Failure modes of LLM reasoning", "phase": 9, "sequence": 5, "track_id": "foundational-ai"},
 ]
 
-PHASE_NAMES = {
+TRADITIONAL_ML_KATAS: list[dict] = [
+    # Phase 0 — What is AI?
+    {"id": "what-is-ai", "title": "What is AI?", "phase": 0, "sequence": 1, "track_id": "traditional-ai-ml"},
+    {"id": "rule-based-systems", "title": "Rule-based systems", "phase": 0, "sequence": 2, "track_id": "traditional-ai-ml"},
+    {"id": "search-algorithms", "title": "Search algorithms", "phase": 0, "sequence": 3, "track_id": "traditional-ai-ml"},
+    {"id": "heuristics-and-cost", "title": "Heuristics and cost", "phase": 0, "sequence": 4, "track_id": "traditional-ai-ml"},
+    {"id": "knowledge-representation", "title": "Knowledge representation", "phase": 0, "sequence": 5, "track_id": "traditional-ai-ml"},
+    # Phase 1 — Data Wrangling
+    {"id": "tabular-data-basics", "title": "Tabular data basics", "phase": 1, "sequence": 1, "track_id": "traditional-ai-ml"},
+    {"id": "missing-values", "title": "Missing values", "phase": 1, "sequence": 2, "track_id": "traditional-ai-ml"},
+    {"id": "outlier-detection", "title": "Outlier detection", "phase": 1, "sequence": 3, "track_id": "traditional-ai-ml"},
+    {"id": "encoding-categorical-variables", "title": "Encoding categorical variables", "phase": 1, "sequence": 4, "track_id": "traditional-ai-ml"},
+    {"id": "feature-scaling", "title": "Feature scaling", "phase": 1, "sequence": 5, "track_id": "traditional-ai-ml"},
+    {"id": "train-test-split", "title": "Train-test split", "phase": 1, "sequence": 6, "track_id": "traditional-ai-ml"},
+    {"id": "exploratory-data-analysis", "title": "Exploratory data analysis", "phase": 1, "sequence": 7, "track_id": "traditional-ai-ml"},
+    # Phase 2 — Supervised Learning: Regression
+    {"id": "simple-linear-regression", "title": "Simple linear regression", "phase": 2, "sequence": 1, "track_id": "traditional-ai-ml"},
+    {"id": "multiple-linear-regression", "title": "Multiple linear regression", "phase": 2, "sequence": 2, "track_id": "traditional-ai-ml"},
+    {"id": "polynomial-regression", "title": "Polynomial regression", "phase": 2, "sequence": 3, "track_id": "traditional-ai-ml"},
+    {"id": "regularization-ridge", "title": "Regularization: Ridge", "phase": 2, "sequence": 4, "track_id": "traditional-ai-ml"},
+    {"id": "regularization-lasso", "title": "Regularization: Lasso", "phase": 2, "sequence": 5, "track_id": "traditional-ai-ml"},
+    {"id": "elastic-net", "title": "Elastic Net", "phase": 2, "sequence": 6, "track_id": "traditional-ai-ml"},
+    {"id": "regression-diagnostics", "title": "Regression diagnostics", "phase": 2, "sequence": 7, "track_id": "traditional-ai-ml"},
+    # Phase 3 — Supervised Learning: Classification
+    {"id": "k-nearest-neighbors", "title": "K-nearest neighbors", "phase": 3, "sequence": 1, "track_id": "traditional-ai-ml"},
+    {"id": "logistic-regression", "title": "Logistic regression", "phase": 3, "sequence": 2, "track_id": "traditional-ai-ml"},
+    {"id": "decision-trees", "title": "Decision trees", "phase": 3, "sequence": 3, "track_id": "traditional-ai-ml"},
+    {"id": "support-vector-machines", "title": "Support vector machines", "phase": 3, "sequence": 4, "track_id": "traditional-ai-ml"},
+    {"id": "naive-bayes", "title": "Naive Bayes", "phase": 3, "sequence": 5, "track_id": "traditional-ai-ml"},
+    {"id": "multiclass-strategies", "title": "Multiclass strategies", "phase": 3, "sequence": 6, "track_id": "traditional-ai-ml"},
+    {"id": "imbalanced-classes", "title": "Imbalanced classes", "phase": 3, "sequence": 7, "track_id": "traditional-ai-ml"},
+    # Phase 4 — Model Evaluation & Selection
+    {"id": "accuracy-and-its-limits", "title": "Accuracy and its limits", "phase": 4, "sequence": 1, "track_id": "traditional-ai-ml"},
+    {"id": "precision-recall-f1", "title": "Precision, recall, F1", "phase": 4, "sequence": 2, "track_id": "traditional-ai-ml"},
+    {"id": "roc-and-auc", "title": "ROC and AUC", "phase": 4, "sequence": 3, "track_id": "traditional-ai-ml"},
+    {"id": "cross-validation", "title": "Cross-validation", "phase": 4, "sequence": 4, "track_id": "traditional-ai-ml"},
+    {"id": "hyperparameter-tuning", "title": "Hyperparameter tuning", "phase": 4, "sequence": 5, "track_id": "traditional-ai-ml"},
+    {"id": "bias-variance-tradeoff", "title": "Bias-variance tradeoff", "phase": 4, "sequence": 6, "track_id": "traditional-ai-ml"},
+    # Phase 5 — Unsupervised Learning
+    {"id": "k-means-clustering", "title": "K-means clustering", "phase": 5, "sequence": 1, "track_id": "traditional-ai-ml"},
+    {"id": "hierarchical-clustering", "title": "Hierarchical clustering", "phase": 5, "sequence": 2, "track_id": "traditional-ai-ml"},
+    {"id": "dbscan", "title": "DBSCAN", "phase": 5, "sequence": 3, "track_id": "traditional-ai-ml"},
+    {"id": "pca-for-dimensionality-reduction", "title": "PCA for dimensionality reduction", "phase": 5, "sequence": 4, "track_id": "traditional-ai-ml"},
+    {"id": "t-sne-visualization", "title": "t-SNE visualization", "phase": 5, "sequence": 5, "track_id": "traditional-ai-ml"},
+    {"id": "anomaly-detection", "title": "Anomaly detection", "phase": 5, "sequence": 6, "track_id": "traditional-ai-ml"},
+    # Phase 6 — Ensemble Methods
+    {"id": "bagging-intuition", "title": "Bagging intuition", "phase": 6, "sequence": 1, "track_id": "traditional-ai-ml"},
+    {"id": "random-forests", "title": "Random forests", "phase": 6, "sequence": 2, "track_id": "traditional-ai-ml"},
+    {"id": "boosting-intuition", "title": "Boosting intuition", "phase": 6, "sequence": 3, "track_id": "traditional-ai-ml"},
+    {"id": "adaboost", "title": "AdaBoost", "phase": 6, "sequence": 4, "track_id": "traditional-ai-ml"},
+    {"id": "gradient-boosting", "title": "Gradient boosting", "phase": 6, "sequence": 5, "track_id": "traditional-ai-ml"},
+    {"id": "xgboost", "title": "XGBoost", "phase": 6, "sequence": 6, "track_id": "traditional-ai-ml"},
+    {"id": "stacking", "title": "Stacking", "phase": 6, "sequence": 7, "track_id": "traditional-ai-ml"},
+    # Phase 7 — Feature Engineering & Pipelines
+    {"id": "feature-creation", "title": "Feature creation", "phase": 7, "sequence": 1, "track_id": "traditional-ai-ml"},
+    {"id": "feature-selection", "title": "Feature selection", "phase": 7, "sequence": 2, "track_id": "traditional-ai-ml"},
+    {"id": "text-features", "title": "Text features", "phase": 7, "sequence": 3, "track_id": "traditional-ai-ml"},
+    {"id": "datetime-features", "title": "Datetime features", "phase": 7, "sequence": 4, "track_id": "traditional-ai-ml"},
+    {"id": "sklearn-pipelines", "title": "Scikit-learn pipelines", "phase": 7, "sequence": 5, "track_id": "traditional-ai-ml"},
+    {"id": "custom-transformers", "title": "Custom transformers", "phase": 7, "sequence": 6, "track_id": "traditional-ai-ml"},
+    # Phase 8 — Time Series & Sequential Data
+    {"id": "time-series-basics", "title": "Time series basics", "phase": 8, "sequence": 1, "track_id": "traditional-ai-ml"},
+    {"id": "autocorrelation", "title": "Autocorrelation", "phase": 8, "sequence": 2, "track_id": "traditional-ai-ml"},
+    {"id": "arima", "title": "ARIMA", "phase": 8, "sequence": 3, "track_id": "traditional-ai-ml"},
+    {"id": "exponential-smoothing", "title": "Exponential smoothing", "phase": 8, "sequence": 4, "track_id": "traditional-ai-ml"},
+    {"id": "forecasting-evaluation", "title": "Forecasting evaluation", "phase": 8, "sequence": 5, "track_id": "traditional-ai-ml"},
+    {"id": "sequence-classification", "title": "Sequence classification", "phase": 8, "sequence": 6, "track_id": "traditional-ai-ml"},
+    # Phase 9 — Reinforcement Learning
+    {"id": "markov-decision-processes", "title": "Markov decision processes", "phase": 9, "sequence": 1, "track_id": "traditional-ai-ml"},
+    {"id": "value-functions", "title": "Value functions", "phase": 9, "sequence": 2, "track_id": "traditional-ai-ml"},
+    {"id": "policy-iteration", "title": "Policy iteration", "phase": 9, "sequence": 3, "track_id": "traditional-ai-ml"},
+    {"id": "q-learning", "title": "Q-learning", "phase": 9, "sequence": 4, "track_id": "traditional-ai-ml"},
+    {"id": "sarsa", "title": "SARSA", "phase": 9, "sequence": 5, "track_id": "traditional-ai-ml"},
+    {"id": "multi-armed-bandits", "title": "Multi-armed bandits", "phase": 9, "sequence": 6, "track_id": "traditional-ai-ml"},
+    {"id": "environment-design", "title": "Environment design", "phase": 9, "sequence": 7, "track_id": "traditional-ai-ml"},
+    # Phase 10 — Probabilistic & Bayesian Methods
+    {"id": "bayesian-thinking", "title": "Bayesian thinking", "phase": 10, "sequence": 1, "track_id": "traditional-ai-ml"},
+    {"id": "maximum-likelihood-estimation", "title": "Maximum likelihood estimation", "phase": 10, "sequence": 2, "track_id": "traditional-ai-ml"},
+    {"id": "map-estimation", "title": "MAP estimation", "phase": 10, "sequence": 3, "track_id": "traditional-ai-ml"},
+    {"id": "gaussian-mixture-models", "title": "Gaussian mixture models", "phase": 10, "sequence": 4, "track_id": "traditional-ai-ml"},
+    {"id": "bayesian-optimization", "title": "Bayesian optimization", "phase": 10, "sequence": 5, "track_id": "traditional-ai-ml"},
+    # Phase 11 — Productionizing ML
+    {"id": "model-serialization", "title": "Model serialization", "phase": 11, "sequence": 1, "track_id": "traditional-ai-ml"},
+    {"id": "data-drift-detection", "title": "Data drift detection", "phase": 11, "sequence": 2, "track_id": "traditional-ai-ml"},
+    {"id": "experiment-tracking", "title": "Experiment tracking", "phase": 11, "sequence": 3, "track_id": "traditional-ai-ml"},
+    {"id": "ab-testing-for-models", "title": "A/B testing for models", "phase": 11, "sequence": 4, "track_id": "traditional-ai-ml"},
+    {"id": "interpretability", "title": "Interpretability", "phase": 11, "sequence": 5, "track_id": "traditional-ai-ml"},
+    {"id": "responsible-ai", "title": "Responsible AI", "phase": 11, "sequence": 6, "track_id": "traditional-ai-ml"},
+]
+
+FOUNDATIONAL_PHASE_NAMES = {
     0: "Foundations (Before ML)",
     1: "What Does It Mean to Learn?",
     2: "Optimization",
@@ -85,33 +175,58 @@ PHASE_NAMES = {
     9: "Reasoning Models",
 }
 
+TRADITIONAL_PHASE_NAMES = {
+    0: "What is AI?",
+    1: "Data Wrangling",
+    2: "Supervised Learning: Regression",
+    3: "Supervised Learning: Classification",
+    4: "Model Evaluation & Selection",
+    5: "Unsupervised Learning",
+    6: "Ensemble Methods",
+    7: "Feature Engineering & Pipelines",
+    8: "Time Series & Sequential Data",
+    9: "Reinforcement Learning",
+    10: "Probabilistic & Bayesian Methods",
+    11: "Productionizing ML",
+}
+
+TRACK_REGISTRY = {
+    "foundational-ai": {
+        "katas": FOUNDATIONAL_KATAS,
+        "phases": FOUNDATIONAL_PHASE_NAMES,
+    },
+    "traditional-ai-ml": {
+        "katas": TRADITIONAL_ML_KATAS,
+        "phases": TRADITIONAL_PHASE_NAMES,
+    },
+}
+
 
 @router.get("/tracks/{track_id}/katas")
 async def list_katas(track_id: str):
-    if track_id == "foundational-ai":
-        return {
-            "katas": FOUNDATIONAL_KATAS,
-            "phases": PHASE_NAMES,
-        }
-    if track_id == "traditional-ai-ml":
-        raise HTTPException(status_code=404, detail="Traditional AI/ML track is coming soon")
-    raise HTTPException(status_code=404, detail=f"Track '{track_id}' not found")
+    track = TRACK_REGISTRY.get(track_id)
+    if not track:
+        raise HTTPException(status_code=404, detail=f"Track '{track_id}' not found")
+    return {
+        "katas": track["katas"],
+        "phases": track["phases"],
+    }
 
 
 @router.get("/tracks/{track_id}/katas/{phase_id}/{kata_id}/content", response_class=PlainTextResponse)
 async def get_kata_content(track_id: str, phase_id: int, kata_id: str):
-    if track_id != "foundational-ai":
+    track = TRACK_REGISTRY.get(track_id)
+    if not track:
         raise HTTPException(status_code=404, detail=f"Track '{track_id}' not found")
 
-    # Find the kata to get its sequence number
+    katas = track["katas"]
     kata = next(
-        (k for k in FOUNDATIONAL_KATAS if k["id"] == kata_id and k["phase"] == phase_id),
+        (k for k in katas if k["id"] == kata_id and k["phase"] == phase_id),
         None,
     )
     if not kata:
         raise HTTPException(status_code=404, detail=f"Kata '{kata_id}' not found in phase {phase_id}")
 
-    # Look for the markdown file
     phase_dir = CONTENT_DIR / track_id / f"phase-{phase_id}"
     seq = kata["sequence"]
     filename = f"{seq:02d}-{kata_id}.md"

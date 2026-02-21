@@ -10,7 +10,7 @@
 - [x] Set up FastAPI backend project structure
 - [x] Set up SolidJS frontend project structure
 - [x] Enforce lowercase-hyphenated file and folder names
-- [x] Create kata markdown content files (all 50 katas)
+- [x] Create kata markdown content files (all 50 foundational katas)
 
 ---
 
@@ -18,17 +18,17 @@
 
 - [x] Landing page with two track cards
 - [x] Foundational AI card (active, links to foundational track)
-- [x] Traditional AI/ML card (coming soon / disabled until foundational is complete)
+- [x] Traditional AI/ML card (active, links to traditional track)
 - [x] Routing from landing page into selected track
 
 ---
 
 ## Kata Structure (Applies to Every Kata)
 
-- [x] Concept & intuition section (problem, why naïve approaches fail, mental models, visuals)
+- [x] Concept & intuition section (problem, why naive approaches fail, mental models, visuals)
 - [x] Interactive experiment (sliders for learning rate, epochs, layers, batch size)
 - [x] Live plots (loss, accuracy, gradients) with incremental visual feedback
-- [x] Live code editor (editable Python code, working example, step-by-step execution)
+- [x] Live code editor with syntax highlighting (CodeMirror 6)
 - [x] Reset to original functionality
 - [ ] Save versions for logged-in users
 
@@ -140,6 +140,145 @@
 
 ---
 
+# Traditional AI/ML Track
+
+---
+
+## PHASE 0 — What is AI? (5 katas)
+
+- [x] Kata: What is AI?
+- [x] Kata: Rule-based systems
+- [x] Kata: Search algorithms
+- [x] Kata: Heuristics and cost
+- [x] Kata: Knowledge representation
+
+---
+
+## PHASE 1 — Data Wrangling (7 katas)
+
+- [x] Kata: Tabular data basics
+- [x] Kata: Missing values
+- [x] Kata: Outlier detection
+- [x] Kata: Encoding categorical variables
+- [x] Kata: Feature scaling
+- [x] Kata: Train-test split
+- [x] Kata: Exploratory data analysis
+
+---
+
+## PHASE 2 — Supervised Learning: Regression (7 katas)
+
+- [x] Kata: Simple linear regression
+- [x] Kata: Multiple linear regression
+- [x] Kata: Polynomial regression
+- [x] Kata: Regularization: Ridge
+- [x] Kata: Regularization: Lasso
+- [x] Kata: Elastic Net
+- [x] Kata: Regression diagnostics
+
+---
+
+## PHASE 3 — Supervised Learning: Classification (7 katas)
+
+- [x] Kata: K-nearest neighbors
+- [x] Kata: Logistic regression
+- [x] Kata: Decision trees
+- [x] Kata: Support vector machines
+- [x] Kata: Naive Bayes
+- [x] Kata: Multiclass strategies
+- [x] Kata: Imbalanced classes
+
+---
+
+## PHASE 4 — Model Evaluation & Selection (6 katas)
+
+- [x] Kata: Accuracy and its limits
+- [x] Kata: Precision, recall, F1
+- [x] Kata: ROC and AUC
+- [x] Kata: Cross-validation
+- [x] Kata: Hyperparameter tuning
+- [x] Kata: Bias-variance tradeoff
+
+---
+
+## PHASE 5 — Unsupervised Learning (6 katas)
+
+- [x] Kata: K-means clustering
+- [x] Kata: Hierarchical clustering
+- [x] Kata: DBSCAN
+- [x] Kata: PCA for dimensionality reduction
+- [x] Kata: t-SNE visualization
+- [x] Kata: Anomaly detection
+
+---
+
+## PHASE 6 — Ensemble Methods (7 katas)
+
+- [x] Kata: Bagging intuition
+- [x] Kata: Random forests
+- [x] Kata: Boosting intuition
+- [x] Kata: AdaBoost
+- [x] Kata: Gradient boosting
+- [x] Kata: XGBoost
+- [x] Kata: Stacking
+
+---
+
+## PHASE 7 — Feature Engineering & Pipelines (6 katas)
+
+- [x] Kata: Feature creation
+- [x] Kata: Feature selection
+- [x] Kata: Text features
+- [x] Kata: Datetime features
+- [x] Kata: Scikit-learn pipelines
+- [x] Kata: Custom transformers
+
+---
+
+## PHASE 8 — Time Series & Sequential Data (6 katas)
+
+- [x] Kata: Time series basics
+- [x] Kata: Autocorrelation
+- [x] Kata: ARIMA
+- [x] Kata: Exponential smoothing
+- [x] Kata: Forecasting evaluation
+- [x] Kata: Sequence classification
+
+---
+
+## PHASE 9 — Reinforcement Learning (7 katas)
+
+- [x] Kata: Markov decision processes
+- [x] Kata: Value functions
+- [x] Kata: Policy iteration
+- [x] Kata: Q-learning
+- [x] Kata: SARSA
+- [x] Kata: Multi-armed bandits
+- [x] Kata: Environment design
+
+---
+
+## PHASE 10 — Probabilistic & Bayesian Methods (5 katas)
+
+- [x] Kata: Bayesian thinking
+- [x] Kata: Maximum likelihood estimation
+- [x] Kata: MAP estimation
+- [x] Kata: Gaussian mixture models
+- [x] Kata: Bayesian optimization
+
+---
+
+## PHASE 11 — Productionizing ML (6 katas)
+
+- [x] Kata: Model serialization
+- [x] Kata: Data drift detection
+- [x] Kata: Experiment tracking
+- [x] Kata: A/B testing for models
+- [x] Kata: Interpretability
+- [x] Kata: Responsible AI
+
+---
+
 ## Frontend (SolidJS)
 
 - [x] Stream training progress (SSE streaming endpoint + Batch/Stream toggle)
@@ -149,6 +288,8 @@
 - [x] Resizable code and output windows with maximise option
 - [x] Sidebar with sequence numbers and collapsible burger menu
 - [x] Dark/light theme toggle with persistent preference
+- [x] Syntax-highlighted code editor (CodeMirror 6)
+- [x] Multi-track support (dynamic sidebar, routing, kata pages)
 
 ---
 
@@ -163,15 +304,7 @@
 - [x] Return metrics, visual outputs, and educational error messages
 - [x] Progress tracking
 - [x] Code versioning
+- [x] Multi-track kata registry
 - [ ] Simple authentication
 - [ ] Anonymous users: temporary session, no persistence
 - [ ] Logged-in users: saved progress, restored experiments, version history
-
----
-
-# Traditional AI/ML Track (Deferred)
-
-> Will be designed and built after the Foundational AI track is complete.
-
-- [ ] Define curriculum (classical AI, supervised, unsupervised, reinforcement learning, etc.)
-- [ ] Create kata sequence for Traditional AI/ML track

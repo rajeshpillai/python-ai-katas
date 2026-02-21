@@ -1,5 +1,5 @@
 import { createSignal, createResource, createMemo, Show } from "solid-js";
-import { useParams } from "@solidjs/router";
+import { useParams, useLocation } from "@solidjs/router";
 import KataWorkspace from "../components/kata-workspace/kata-workspace";
 import MarkdownContent from "../components/markdown-content/markdown-content";
 import { apiGetText } from "../lib/api-client";
@@ -18,14 +18,16 @@ function extractCodeFromMarkdown(md: string): string | undefined {
 
 export default function KataPage() {
   const params = useParams();
+  const location = useLocation();
   const [activeTab, setActiveTab] = createSignal<Tab>("concept");
 
-  const phaseNum = () => parseInt(params.phaseId, 10);
-  const phaseName = () => PHASE_NAMES[phaseNum()] ?? "";
-  const kataId = () => params.kataId?.replace(/-/g, " ") ?? "";
+  const trackId = () => location.pathname.split("/")[1] ?? "foundational-ai";
+  const phaseNum = () => parseInt(params.phaseId ?? "0", 10);
+  const phaseName = () => PHASE_NAMES[trackId()]?.[phaseNum()] ?? "";
+  const kataId = () => (params.kataId ?? "").replace(/-/g, " ");
 
   const [content] = createResource(
-    () => ({ trackId: "foundational-ai", phaseId: params.phaseId, kataId: params.kataId }),
+    () => ({ trackId: trackId(), phaseId: params.phaseId, kataId: params.kataId }),
     (source) =>
       apiGetText(
         `/tracks/${source.trackId}/katas/${source.phaseId}/${source.kataId}/content`
