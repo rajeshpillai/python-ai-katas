@@ -22,7 +22,16 @@ export default function KataPage() {
   const [activeTab, setActiveTab] = createSignal<Tab>("concept");
 
   const lang = () => params.lang ?? "python";
-  const trackId = () => location.pathname.split("/")[2] ?? "foundational-ai";
+  // location.pathname includes the deploy base prefix on GitHub Pages
+  // (e.g. "/python-ai-katas/python/foundational-ai/..."), so strip it
+  // before splitting — index [2] must point at the track segment.
+  const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const trackId = () => {
+    const p = basePath && location.pathname.startsWith(basePath)
+      ? location.pathname.slice(basePath.length)
+      : location.pathname;
+    return p.split("/")[2] ?? "foundational-ai";
+  };
   const phaseNum = () => parseInt(params.phaseId ?? "0", 10);
   const phaseName = () => PHASE_NAMES[trackId()]?.[phaseNum()] ?? "";
   const kataId = () => (params.kataId ?? "").replace(/-/g, " ");
