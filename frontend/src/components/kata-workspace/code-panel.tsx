@@ -10,6 +10,7 @@ interface CodePanelProps {
   onRun: (code: string) => void;
   running: boolean;
   defaultCode?: string;
+  readOnlyNotice?: string;
 }
 
 const FALLBACK_CODE = `# Write your Python code here
@@ -65,13 +66,15 @@ export default function CodePanel(props: CodePanelProps) {
       <div class="code-panel__header">
         <span class="code-panel__title">Code</span>
         <div class="code-panel__actions">
-          <button
-            class="code-panel__btn code-panel__btn--run"
-            onClick={handleRun}
-            disabled={props.running}
-          >
-            {props.running ? "Running..." : "Run"}
-          </button>
+          <Show when={!props.readOnlyNotice}>
+            <button
+              class="code-panel__btn code-panel__btn--run"
+              onClick={handleRun}
+              disabled={props.running}
+            >
+              {props.running ? "Running..." : "Run"}
+            </button>
+          </Show>
           <button class="code-panel__btn" onClick={handleReset}>
             Reset
           </button>
@@ -85,6 +88,9 @@ export default function CodePanel(props: CodePanelProps) {
           </button>
         </div>
       </div>
+      <Show when={props.readOnlyNotice}>
+        <div class="code-panel__readonly-banner">{props.readOnlyNotice}</div>
+      </Show>
       <Show when={sliderConfigs().length > 0}>
         <SliderBar
           configs={sliderConfigs()}

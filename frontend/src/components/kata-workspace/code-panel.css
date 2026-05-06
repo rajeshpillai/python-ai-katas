@@ -27,6 +27,15 @@
   gap: 6px;
 }
 
+.code-panel__readonly-banner {
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  border-left: 3px solid var(--accent, #6b7280);
+}
+
 .code-panel__btn {
   padding: 4px 12px;
   border: 1px solid var(--border);

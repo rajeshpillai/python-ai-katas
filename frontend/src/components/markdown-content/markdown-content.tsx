@@ -1,5 +1,12 @@
-import { createMemo } from "solid-js";
+import { createEffect, createMemo } from "solid-js";
+import hljs from "highlight.js/lib/core";
+import python from "highlight.js/lib/languages/python";
+import rust from "highlight.js/lib/languages/rust";
 import "./markdown-content.css";
+import "./markdown-highlight.css";
+
+hljs.registerLanguage("python", python);
+hljs.registerLanguage("rust", rust);
 
 interface MarkdownContentProps {
   source: string;
@@ -63,6 +70,30 @@ function parseMarkdown(md: string): string {
 
 export default function MarkdownContent(props: MarkdownContentProps) {
   const rendered = createMemo(() => parseMarkdown(props.source));
+  let containerRef: HTMLDivElement | undefined;
 
-  return <div class="markdown-content" innerHTML={rendered()} />;
+  createEffect(() => {
+    // Re-evaluate rendered() to track it; the innerHTML attribute
+    // applies the new content, then we highlight all code blocks.
+    rendered();
+    if (!containerRef) return;
+    const blocks = containerRef.querySelectorAll<HTMLElement>(
+      "pre.md-code-block code[class*='language-']",
+    );
+    blocks.forEach((el) => {
+      // hljs marks elements as highlighted; reset to allow re-highlighting
+      // when navigating between katas (innerHTML replaces the nodes anyway,
+      // so this is mostly defensive).
+      delete el.dataset.highlighted;
+      hljs.highlightElement(el);
+    });
+  });
+
+  return (
+    <div
+      ref={containerRef}
+      class="markdown-content"
+      innerHTML={rendered()}
+    />
+  );
 }

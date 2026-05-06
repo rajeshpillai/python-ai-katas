@@ -60,7 +60,11 @@ export default function KataWorkspace(props: KataWorkspaceProps) {
     tensors: [],
   });
 
+  const isStaticBuild = import.meta.env.VITE_STATIC_BUILD === "true";
+  const rustReadOnly = isStaticBuild && props.lang === "rust";
+
   const handleRun = async (code: string) => {
+    if (rustReadOnly) return;
     setRunning(true);
     setOutput(null);
 
@@ -180,6 +184,11 @@ export default function KataWorkspace(props: KataWorkspaceProps) {
                 onRun={handleRun}
                 running={running()}
                 defaultCode={props.defaultCode}
+                readOnlyNotice={
+                  rustReadOnly
+                    ? "Rust katas are read-only on this static build — clone the repo and run the Rust backend to execute."
+                    : undefined
+                }
               />
             </Show>
             <Show when={maximized() === "output"}>
@@ -207,6 +216,11 @@ export default function KataWorkspace(props: KataWorkspaceProps) {
               onRun={handleRun}
               running={running()}
               defaultCode={props.defaultCode}
+              readOnlyNotice={
+                rustReadOnly
+                  ? "Rust katas are read-only on this static build — clone the repo and run the Rust backend to execute."
+                  : undefined
+              }
             />
           </Resizable.Panel>
           <Resizable.Handle

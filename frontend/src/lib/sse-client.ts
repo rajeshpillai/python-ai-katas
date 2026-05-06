@@ -1,4 +1,5 @@
 import { API_BASE } from "./constants";
+import { isStaticBuild } from "./static-content";
 
 export interface SSECallbacks {
   onStdout: (line: string) => void;
@@ -17,6 +18,22 @@ export async function executeStream(
   callbacks: SSECallbacks,
   signal?: AbortSignal,
 ): Promise<void> {
+  // Static build: route Python execution through Pyodide; Rust has no
+  // browser equivalent so the workspace surfaces a "run locally" banner
+  // before reaching this point.
+  if (isStaticBuild() && lang === "python") {
+    const { runInPyodide } = await import("./pyodide-runner");
+    await runInPyodide(code, callbacks);
+    return;
+  }
+  if (isStaticBuild() && lang === "rust") {
+    callbacks.onError(
+      "Rust katas are read-only on the static build. Clone the repo and run the Rust backend to execute them.",
+    );
+    callbacks.onDone(0);
+    return;
+  }
+
   const res = await fetch(`${API_BASE}/${lang}/execute/stream`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
