@@ -170,6 +170,27 @@ Same line in both places. The viewer must answer "what is this and should I keep
 
 ---
 
+## Convert the recording into a Reddit-ready GIF
+
+Some subs (and old.reddit, plus most third-party clients) prefer GIFs over uploaded videos — they autoplay, loop forever, and embed cleanly in feeds. After you've recorded the demo as MP4, run:
+
+```bash
+./scripts/make-demo-gif.sh demo.mp4
+# → demo.gif
+
+# Trim to just the money shot (Reddit timeline previews favor short loops):
+START=00:00:30 DURATION=00:00:20 ./scripts/make-demo-gif.sh demo.mp4 out/money-shot.gif
+
+# Push higher quality (larger file, may exceed Reddit's 20MB GIF threshold):
+WIDTH=1080 FPS=20 ./scripts/make-demo-gif.sh demo.mp4
+```
+
+The script does two-pass palette encoding (clean colors, no banding), defaults to 800px / 15fps, and warns if the output crosses Reddit's ~20MB recompression threshold. See `./scripts/make-demo-gif.sh --help` for all flags.
+
+> 💡 For Reddit feed thumbnails, **a tightly-trimmed 15–25 second GIF of just the edit-and-Run loop** outperforms a full 90s video. Upload the GIF as the post media and link to the longer video / live demo in the post body.
+
+---
+
 ## Alternates
 
 ### 30-second cut (r/coolgithubprojects, r/InternetIsBeautiful, Twitter)
