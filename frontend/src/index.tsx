@@ -25,9 +25,14 @@ function TraditionalAiMlRedirect() {
   return <Navigate href={`/${params.lang}/traditional-ai-ml/0/what-is-ai`} />;
 }
 
+// Base path for the deploy. In dev this is "/", in the GitHub Pages
+// static build it's "/python-ai-katas/". Strip the trailing slash for
+// SolidJS Router's `base` prop.
+const routerBase = import.meta.env.BASE_URL.replace(/\/$/, "") || undefined;
+
 render(
   () => (
-    <Router root={App}>
+    <Router root={App} base={routerBase}>
       <Route path="/" component={Landing} />
       <Route path="/:lang" component={LanguageTracks} />
       <Route path="/:lang/foundational-ai" component={FoundationalAi}>
