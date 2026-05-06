@@ -1,212 +1,187 @@
-# Reddit Demo Video Script — AI Katas
+# Reddit Demo Video — AI Katas
 
-> A screen-recording script for a **75–90 second** Reddit demo of AI Katas.
-> Different goals than LinkedIn: Reddit rewards *show, don't tell* — keep
-> voice-over **optional** (text overlays + lo-fi music outperform narration
-> on most subs), front-load the live code execution, and use a casual,
-> "I built this" tone in the post body.
->
-> Companion to [linkedin-video-script.md](linkedin-video-script.md). Most
-> of the pre-flight setup is shared; differences are flagged below.
+A screen-recording script for a **75–90 second** Reddit-tailored demo of
+AI Katas. Reddit rewards *show-don't-tell*: silent + captions + lo-fi
+music outperforms voice-over on most subs. Front-load the live code
+execution — that's the moment that makes the post.
+
+Companion to [linkedin-video-script.md](linkedin-video-script.md).
 
 ---
 
-## Format target
+## Format
 
 | | |
 |---|---|
-| **Length** | 75–90s (sweet spot for high-engagement Reddit posts) |
-| **Aspect ratio** | 16:9 (1920×1080) — Reddit is desktop-first |
-| **Audio** | Lo-fi/ambient music only by default; voice-over optional |
-| **Captions** | Required — burn-in, large enough for mobile |
-| **File** | MP4 / H.264, ≤200MB, ≤5 min (Reddit's hard limits) |
+| **Length** | 75–90s |
+| **Aspect** | 16:9 · 1920×1080 |
+| **Audio** | Lo-fi instrumental (~−24 dB). Voice-over **optional, default off**. |
+| **Captions** | Burn-in. Sans-serif, 48pt, white with black stroke. |
+| **Encode** | H.264, ≤200MB, ≤5 min |
 
 ---
 
-## Hook line (caption, first 2 seconds)
+## Pre-flight (do this before recording)
+
+1. Open the **deployed** site, not localhost: `https://rajeshpillai.github.io/python-ai-katas/`
+2. **Dark mode on** (top-right toggle) — looks more "developer-tool"
+3. Browser at 100% zoom. Hide the bookmarks bar. Close devtools.
+4. **Pre-warm** these katas — open each, click Run once, wait for the plot.
+   This caches Pyodide + numpy/sklearn/matplotlib so the recording isn't
+   blocked by a 15MB cold load:
+   - **Foundational AI → Phase 0 → "Visualizing distributions"** (histogram)
+   - **Foundational AI → Phase 1 → "Linear regression"** (scatter + line)
+   - **Traditional AI/ML → Phase 5 → "K-means clustering"** (cluster plot)
+5. Keep one **Rust kata** open in another tab for the cut at 0:55
+6. Leave a second tab on the **GitHub repo** in case you want a B-roll cut
+
+> 💡 **Important**: Reddit shows the **first frame** as the post thumbnail. Open mid-demo on a colorful plot, not a logo or landing page.
+
+---
+
+## Hook (post title + first text overlay)
 
 > **"I built an AI learning playground that runs entirely in your browser."**
 
-This is the post title and the opening text overlay. Reddit decides whether
-to keep watching in **2 seconds** — the hook *must* answer "what is this and
-why should I care."
+Same line in both places. The viewer must answer "what is this and should I keep watching" within 2 seconds.
 
 ---
 
-## Pre-flight checklist
+## Shot list
 
-Same as the LinkedIn script — see
-[linkedin-video-script.md § Pre-flight](linkedin-video-script.md#pre-flight-checklist).
-The critical one: pre-load and run each demo kata once so Pyodide and its
-packages are warm in the browser cache. **Do not record a cold first run** —
-the ~15MB Pyodide download will tank pacing.
-
-Reddit-specific additions:
-
-- Pick **dark mode** — looks more "developer-tool" on Reddit feeds
-- Have a second tab ready with the **GitHub repo** in case you want a B-roll cut to the README
-- Test on the deployed URL, not localhost — viewers who click through expect the live site to behave the same
-
----
-
-## Shot list (silent-with-captions cut)
-
-> All voice-over lines below are **optional** — most Reddit posts perform
-> equally well or better with caption-only versions and ambient music.
-
-### Shot 1 — Hook (0:00–0:03)
+### Shot 1 — Cold-open thumbnail (0:00–0:03)
 
 | | |
 |---|---|
-| **Screen** | Cold open on a kata page mid-demo: a matplotlib plot rendering live, code visible in the editor |
-| **Action** | Static, hold |
-| **Caption (large, centered)** | `I built an AI learning playground` <br> `that runs in your browser.` |
-| **Voice-over (optional)** | "Most ML tutorials are videos. This one's a playground." |
+| **Screen** | Pre-warmed kata page, plot visible, code in the editor |
+| **Action** | Static; ~0.5s in, fade-up the caption |
+| **Caption** | `I built an AI learning playground` <br> `that runs in your browser.` |
+| **Voice-over (optional)** | "Most ML tutorials are videos you watch. This one's a playground you run." |
 
-> 💡 **Why open mid-demo?** Reddit feeds preview the first frame as the thumbnail. A live plot + code is more arresting than a landing page logo.
-
-### Shot 2 — The setup (0:03–0:12)
+### Shot 2 — The two tracks (0:03–0:14)
 
 | | |
 |---|---|
-| **Screen** | Cut to landing page → click into Python card → show two-track picker |
-| **Action** | Cursor moves between **Foundational AI** and **Traditional AI/ML** cards, hovering each |
-| **Caption** | `Two tracks: intuition-first OR classical ML` <br> *(then 3s later)* `125+ runnable katas. Pick any order.` |
-| **Voice-over (optional)** | "Two tracks. Foundational AI builds intuition. Traditional ML covers the classical stuff. Pick whatever order makes sense to you." |
+| **Screen** | Cut to landing page → click **Python** → land on track picker |
+| **Action** | Cursor hovers each track card slowly (~1s on each); briefly highlight the kata count |
+| **Caption** | `Two tracks. 125+ runnable katas.` <br> *(2s later)* `Pick any order — no fixed path.` |
+| **Voice-over (optional)** | "Two tracks: Foundational AI builds intuition from data up. Traditional ML covers the classical stuff people ship. Pick whatever order makes sense to you." |
 
-### Shot 3 — Tutorial section (0:12–0:28)
-
-| | |
-|---|---|
-| **Screen** | Click **Foundational AI** → kata: *Visualizing distributions* (or whichever you pre-warmed) |
-| **Action** | Smooth scroll through the kata content: heading → intuition paragraph → worked example → syntax-highlighted Python code block |
-| **Caption** | `Concept` *(at top of scroll)* → `Intuition` *(mid)* → `Code` *(at the editor)* — three quick text pops as you scroll past each section |
-| **Voice-over (optional)** | "Each kata starts with intuition — what we're solving and why naive approaches fail. Then the code." |
-
-### Shot 4 — The money shot (0:28–0:55)
-
-> **The most important shot in the video.** This is where Reddit's "wait
-> what, that runs in the browser?" moment happens. Spend the most time
-> here. Don't rush.
+### Shot 3 — Tutorial structure (0:14–0:30)
 
 | | |
 |---|---|
-| **Screen** | Same kata, scroll to the editor |
-| **Action** | Click into the editor, change a parameter (e.g. `n_samples` from `100` to `2000`, or mean from `0` to `5`), click **Run**. Plot updates within a second. **Do this twice.** Once to demonstrate, once to show speed. |
-| **Caption** | `No install. No signup. No backend.` <br> *(after first run)* `Pyodide → Python in WebAssembly` |
-| **Voice-over (optional)** | "Edit the code. Hit Run. Python compiled to WebAssembly executes it right in the browser. No install, no signup, no notebook server." |
+| **Screen** | Click **Foundational AI** → kata: *Visualizing distributions* |
+| **Action** | Slow scroll through the kata: heading → intuition paragraph → worked example → syntax-highlighted Python block. Pause ~1s on the code block so the colors register. |
+| **Caption** | `Concept` → `Intuition` → `Code` (cycle as you scroll past each) |
+| **Voice-over (optional)** | "Each kata starts with intuition — what we're solving and why naive approaches fail. Then a worked example. Then live code." |
 
-> 💡 **Bonus shot**: cut briefly to a second kata (K-means or convolution) and run it — variety sells the platform.
+### Shot 4 — The money shot (0:30–0:58) ⭐
 
-### Shot 5 — The Rust track + theme toggle (0:55–1:10)
+> **The most important 28 seconds in the video.** Don't rush this.
 
 | | |
 |---|---|
-| **Screen** | Switch language to **Rust** (top-left) → open one Rust kata |
-| **Action** | Show Rust syntax highlighting briefly, then flip the **theme toggle** (top-right) light↔dark for visual punch |
-| **Caption** | `Rust track too — algorithms from scratch, no ML crates` |
+| **Screen** | Same kata, scrolled to the editor + Run button |
+| **Action 1** | Click into the editor. Change `n_samples = 1000` to `n_samples = 5000`. Click **Run**. Plot updates in <1s. **Hold for 2s** so the viewer registers it. |
+| **Action 2** | Change `mu = 0` to `mu = 5`. Click Run. Plot shifts. Hold 2s. |
+| **Action 3** | Open a new kata via sidebar (e.g. *Linear regression* or *K-means*). Click Run on the default code. Show a different chart appear. |
+| **Caption (sequenced)** | `Edit. Run.` → `No install. No signup. No backend.` → `Pyodide → Python in WebAssembly` |
+| **Voice-over (optional)** | "Edit the code. Hit Run. Python compiled to WebAssembly executes it right in the browser. No notebook server, no signup, no install." |
+
+> If you only have time for one variation, do **Action 1** twice (once subtly, once dramatically — e.g. `n_samples = 100` → `n_samples = 50000`) so the speed of the re-render is the takeaway.
+
+### Shot 5 — Rust + theme (0:58–1:12)
+
+| | |
+|---|---|
+| **Screen** | Switch language toggle (top-left) to **Rust** → open one Rust kata |
+| **Action** | Show the Rust kata content + syntax-highlighted Rust code. Then flip the **theme toggle** (top-right) light↔dark for ~1s of visual punch. |
+| **Caption** | `Rust track too — algorithms from scratch, no ML crates.` |
 | **Voice-over (optional)** | "There's a Rust track too — every algorithm written from scratch, no ML crates. For when you want to see what's actually happening under the hood." |
 
-### Shot 6 — Outro / CTA (1:10–1:25)
+> 💡 Don't try to *run* the Rust kata in the video — `rustc` isn't in the browser. The Rust track is read-only on the static deploy; the workspace banner already says so. Skip past it.
+
+### Shot 6 — Outro (1:12–1:25)
 
 | | |
 |---|---|
-| **Screen** | Cut back to landing page; center the URL in big text |
-| **Action** | Hold for ~5s; subtle zoom-in on the URL |
-| **Caption** | `rajeshpillai.github.io/python-ai-katas` <br> *(smaller, beneath)* `Free · Open source · Comments and PRs welcome` |
+| **Screen** | Cut back to the landing page, large URL centered |
+| **Action** | Static, slow zoom-in (~5s). End on the URL filling the lower third. |
+| **Caption** | `rajeshpillai.github.io/python-ai-katas` <br> `Free · Open source · Comments and PRs welcome` |
 | **Voice-over (optional)** | "Free, open source, runs in your browser. Link's in the post. Tear it apart." |
 
-### Shot 7 — Disclosure (1:25–1:30, optional)
-
-| | |
-|---|---|
-| **Screen** | Plain background or very faded landing page |
-| **Caption** | `Built with LLM assistance · human-reviewed · ongoing review` |
-
-> 💡 **Or skip Shot 7** and move the disclosure to the post body — keeps the video clean and ends on the URL.
+> 💡 Move the LLM disclosure to the post body, not the video. Keeps the close clean.
 
 ---
 
-## Reddit post body (paste in the comment field)
+## Reddit post body
 
-> Hey folks — been tinkering on **AI Katas**, an interactive playground for learning AI from first principles. Live demo runs entirely in your browser.
+> Hey folks — been building **AI Katas**, an interactive playground for learning AI from first principles. Live demo runs entirely in the browser.
 >
-> The shape:
+> What you're looking at:
 >
-> - 🧩 **125+ small, runnable katas** — concept, intuition, then live code you can edit and run
+> - 🧩 **125+ small, runnable katas** — each one structured as concept → intuition → code you can edit and run
 > - 🧠 **Two tracks**: *Foundational AI* (intuition-first — data → optimization → neural nets → attention → LLMs) and *Traditional AI/ML* (classical — regression, ensembles, time series, RL, productionizing)
 > - 🦀 **Bonus Rust track** — every algorithm from scratch, no ML crates
-> - 🌐 **Pyodide for execution** — no install, no signup, just edit code and hit Run
+> - 🌐 **Pyodide for execution** — Python in WebAssembly. No install, no signup, hit Run
 >
-> Tracks/phases/katas are independent units. There's no "correct" sequence — pick, swap, skip, revisit. Treat it like a buffet, not a textbook.
+> Tracks/phases/katas are independent units. There's no "correct" sequence — pick, swap, skip, revisit. Buffet, not textbook.
 >
 > 🔗 Demo: https://rajeshpillai.github.io/python-ai-katas/
 > 📦 Source: https://github.com/rajeshpillai/python-ai-katas
 >
-> **Honest disclosure**: a lot of the code and content was generated with LLM assistance and human-reviewed. More review is in progress, so if you spot anything wrong, hand-wavy, or just plain bad — issues and PRs are *very* welcome. Roast it.
+> **Honest disclosure**: a lot of the code and content was generated with LLM assistance and human-reviewed. More review is in progress, so if you spot anything wrong, hand-wavy, or just bad — issues and PRs are *very* welcome. Roast it.
 
 ---
 
 ## Subreddit-specific tweaks
 
-Reddit is not one audience. Tune the title, the leading frame of the video, and the post-body emphasis per sub:
-
-### r/learnmachinelearning
-
-- **Title**: "Built an interactive AI/ML playground (browser-based, no install) — looking for feedback from learners"
-- **Lead frame**: a kata showing the *Concept → Intuition → Code* structure
-- **Post emphasis**: the two-track choice + non-linear path (most of this audience is overwhelmed by curriculum overload)
-
-### r/Python
-
-- **Title**: "Built an AI learning app that runs Python entirely in your browser via Pyodide — no install"
-- **Lead frame**: code editor + plot output, *not* the landing page
-- **Post emphasis**: the Pyodide tech + "every kata is a runnable Python script you can hack on"
-
-### r/rust
-
-- **Title**: "AI/ML katas with a Rust track — every algorithm from scratch, no ML crates"
-- **Lead frame**: a Rust kata with syntax-highlighted code
-- **Post emphasis**: lead with the Rust track, mention Python as a sibling
-- **Note**: Rust katas don't run in the browser (no `rustc` in WASM); call this out directly so the audience isn't surprised
-
-### r/SideProject
-
-- **Title**: "AI Katas — a free, browser-based AI learning playground I've been building"
-- **Lead frame**: a clean landing page shot with the title visible
-- **Post emphasis**: the journey/tech stack (SolidJS + Pyodide + FastAPI) — this sub loves build details
-- Optional: a brief "what I learned" / "what's next" section
-
-### r/MachineLearning
-
-- ⚠️ **Read the rules first.** This sub has strict self-promotion rules. Likely best in the **[D] Discussion** flair as a teaching-resource share, not a project showcase. Lead with the *educational thesis* (intuition-first vs traditional), not the demo.
+| Sub | Title | Lead frame | Emphasize |
+|---|---|---|---|
+| **r/learnmachinelearning** | *"Browser-based AI/ML playground — looking for feedback from learners"* | A kata showing Concept → Intuition → Code | Two-track choice + non-linear path |
+| **r/Python** | *"AI learning app that runs Python entirely in the browser via Pyodide"* | Code editor + plot output | Pyodide + "every kata is a hackable Python script" |
+| **r/rust** | *"AI/ML katas with a Rust track — every algorithm from scratch, no ML crates"* | A Rust kata with highlighted code | Lead with Rust; clarify that Rust katas don't run in the browser (no rustc in WASM) |
+| **r/SideProject** | *"AI Katas — a free, browser-based AI learning playground"* | Clean landing page | Tech stack (SolidJS + Pyodide + FastAPI) and build details |
+| **r/MachineLearning** | ⚠️ Read the rules first. Likely **[D] Discussion** flair, framed as a *teaching resource*, not a project showcase. | — | The educational thesis (intuition-first vs traditional) |
 
 ---
 
-## Recording tips (Reddit-specific)
+## Recording rules of thumb
 
-- **Skip voice-over by default**. Reddit autoplays muted; most viewers never unmute. Captions + ambient lo-fi (volume ~−24 dB) outperform a polished voice-over for engagement.
-- **First frame matters more than first 3 seconds** — Reddit shows it as the thumbnail. Open mid-demo, not on a logo.
-- **No watermarks, no end cards, no calls-to-subscribe** — Reddit hates these and will downvote. Outro is the URL only.
-- **Caption font**: sans-serif, white with black stroke, ~48pt. Burn in — Reddit's caption layer is unreliable.
-- **Resolution**: 1080p. Lower won't matter (Reddit recompresses), higher wastes bandwidth.
-- **No music with vocals** — gets stuck in the recommendation algorithm and tanks watch-through. Pure instrumental lo-fi or ambient.
-- **Cut hard, not soft.** No fades. Reddit pacing is fast.
+- **Skip voice-over by default.** Reddit autoplays muted; most viewers never unmute.
+- **First frame = thumbnail.** Open mid-demo, not on a logo.
+- **No watermarks, no end cards, no "subscribe."** Reddit downvotes these reflexively.
+- **Hard cuts only.** No fades, no crossfades. Reddit pacing is fast.
+- **No vocal music.** Pure instrumental lo-fi or ambient — vocal music tanks watch-through.
+- **Burn captions in.** Reddit's caption layer is unreliable.
+- **Cursor highlighter** (Mousecape on macOS, ZoomIt on Windows) — it draws the eye to where the action is.
+- **Aim for ~3 cuts every 5 seconds** in the demo sections; 1 cut per 5s in the outro.
 
 ---
 
-## Optional alternates
+## Common mistakes to avoid
 
-### 30-second cut (for r/coolgithubprojects, r/InternetIsBeautiful)
+- **Recording cold.** First Pyodide load is ~15MB. Always pre-warm.
+- **Long Run delays.** If a kata takes >2s to render after Run, swap it for a faster one. Time-to-output matters more than which kata it is.
+- **Tiny captions.** If you can't read them on a phone screen at arm's length, they're too small.
+- **Showing the "Loading torch..." message.** Skip torch katas in the demo unless you've pre-loaded torch in that browser session.
+- **Demoing the Run button on a Rust kata.** It's hidden by design — don't try, just scroll past.
 
-1. 0–2s: Hook caption over a live plot
-2. 2–10s: Edit code → Run → plot updates (the money shot, no setup)
-3. 10–18s: Quick scroll showing two tracks + Rust
-4. 18–25s: Theme toggle + URL
-5. 25–30s: Disclosure caption
+---
 
-### 3-minute cut (for blog embed or longer demo)
+## Alternates
 
-- Same 7-shot structure
-- Add a **Shot 4.5**: dwell on the output panel (plots, metrics, tensors) for 15s
-- Add a **Shot 5.5**: open the GitHub repo, scroll the README, show the static-build script briefly — appeals to the "how is this built" curiosity
+### 30-second cut (r/coolgithubprojects, r/InternetIsBeautiful, Twitter)
+
+1. 0–2s — Hook caption over a live plot
+2. 2–10s — Edit code, hit Run, plot updates (the money shot, no setup)
+3. 10–18s — Quick scroll showing two tracks + Rust mention
+4. 18–25s — Theme flip + URL on screen
+5. 25–30s — LLM disclosure caption
+
+### 3-minute cut (blog embed, YouTube)
+
+- Same 6-shot structure
+- After Shot 4: dwell ~15s on the output panel (plots, metrics, tensors)
+- After Shot 5: cut to the GitHub repo, scroll the README, briefly show `scripts/build-static.sh` running in a terminal — appeals to "how is this built" curiosity
