@@ -20,7 +20,7 @@ export async function apiGet<T>(path: string, lang: string): Promise<T> {
 
 export async function apiGetText(path: string, lang: string): Promise<string> {
   if (isStaticBuild()) {
-    const handled = tryStaticGetText(path);
+    const handled = tryStaticGetText(path, lang);
     if (handled) return handled;
   }
   const url = `${base(lang)}${path}`;

@@ -88,15 +88,27 @@ print(json.dumps(out, indent=2))
 " > "$INDEX_OUT"
 cd "$REPO_ROOT"
 
-# --- 2. Copy kata markdown content ------------------------------------------
+# --- 2. Copy kata markdown content (per-language) --------------------------
 
-CONTENT_SRC="$REPO_ROOT/backend/python/content"
 CONTENT_DST="$REPO_ROOT/frontend/public/content"
-
-info "Copying kata content $CONTENT_SRC → $CONTENT_DST"
+info "Copying kata content → $CONTENT_DST/{python,rust}"
 rm -rf "$CONTENT_DST"
 mkdir -p "$CONTENT_DST"
-cp -a "$CONTENT_SRC/." "$CONTENT_DST/"
+
+# Python content is required.
+PY_CONTENT="$REPO_ROOT/backend/python/content"
+[[ -d "$PY_CONTENT" ]] || error "Python content not found at $PY_CONTENT"
+mkdir -p "$CONTENT_DST/python"
+cp -a "$PY_CONTENT/." "$CONTENT_DST/python/"
+
+# Rust content is optional (deploys are still useful with Python alone).
+RUST_CONTENT="$REPO_ROOT/backend/rust/content"
+if [[ -d "$RUST_CONTENT" ]]; then
+    mkdir -p "$CONTENT_DST/rust"
+    cp -a "$RUST_CONTENT/." "$CONTENT_DST/rust/"
+else
+    warn "Rust content not found at $RUST_CONTENT — skipping (Rust katas will 404 on the static deploy)."
+fi
 
 # --- 3. Vite build ----------------------------------------------------------
 

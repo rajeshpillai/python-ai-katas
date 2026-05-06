@@ -41,6 +41,7 @@ export async function staticGetKataContent(
   trackId: string,
   phaseId: number,
   kataId: string,
+  lang: string,
 ): Promise<string> {
   const index = await loadIndex();
   const entry = index[trackId];
@@ -51,7 +52,7 @@ export async function staticGetKataContent(
   if (!kata) throw new Error(`Kata '${kataId}' not in phase ${phaseId}`);
 
   const seq = String(kata.sequence).padStart(2, "0");
-  const url = `${BASE}content/${trackId}/phase-${phaseId}/${seq}-${kataId}.md`;
+  const url = `${BASE}content/${lang}/${trackId}/phase-${phaseId}/${seq}-${kataId}.md`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Markdown fetch failed: ${res.status}`);
   return res.text();
@@ -71,10 +72,10 @@ export function tryStaticGet<T>(path: string): Promise<T> | null {
   return null;
 }
 
-export function tryStaticGetText(path: string): Promise<string> | null {
+export function tryStaticGetText(path: string, lang: string): Promise<string> | null {
   const content = path.match(CONTENT_RE);
   if (content) {
-    return staticGetKataContent(content[1], parseInt(content[2], 10), content[3]);
+    return staticGetKataContent(content[1], parseInt(content[2], 10), content[3], lang);
   }
   return null;
 }
