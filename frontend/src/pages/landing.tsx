@@ -1,6 +1,7 @@
 import { For } from "solid-js";
 import ThemeToggle from "../components/layout/theme-toggle";
 import RepoLink from "../components/layout/repo-link";
+import Footer from "../components/layout/footer";
 import TrackCard from "../components/track-card/track-card";
 import { LANGUAGES } from "../lib/constants";
 import "./landing.css";
@@ -31,6 +32,7 @@ export default function Landing() {
           </For>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
