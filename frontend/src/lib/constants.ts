@@ -1,5 +1,6 @@
 export const THEME_STORAGE_KEY = "theme";
 export const API_BASE = "/api";
+export const REPO_URL = "https://github.com/rajeshpillai/python-ai-katas";
 
 export const LANGUAGES = [
   {

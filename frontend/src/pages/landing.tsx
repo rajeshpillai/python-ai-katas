@@ -1,5 +1,6 @@
 import { For } from "solid-js";
 import ThemeToggle from "../components/layout/theme-toggle";
+import RepoLink from "../components/layout/repo-link";
 import TrackCard from "../components/track-card/track-card";
 import { LANGUAGES } from "../lib/constants";
 import "./landing.css";
@@ -8,6 +9,7 @@ export default function Landing() {
   return (
     <div class="landing">
       <header class="landing__header">
+        <RepoLink />
         <ThemeToggle />
       </header>
       <main class="landing__main">
