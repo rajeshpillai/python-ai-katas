@@ -3,6 +3,11 @@
 // without changing its callback wiring.
 
 import type { SSECallbacks } from "./sse-client";
+import type { ExecutionResult, PlotData, TensorData } from "./types";
+
+const PLOT_RE = /__KATA_PLOT_(\d+)__:(.*):__END_KATA_PLOT__/;
+const METRIC_RE = /__KATA_METRIC__:(.*?):(.*?):__END_KATA_METRIC__/;
+const TENSOR_RE = /__KATA_TENSOR__:(.*):__END_KATA_TENSOR__/;
 
 const PYODIDE_VERSION = "0.26.4";
 const PYODIDE_INDEX = `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/full/`;
@@ -152,4 +157,65 @@ export async function runInPyodide(
   } finally {
     callbacks.onDone(performance.now() - start);
   }
+}
+
+// One-shot bridge: runs code in Pyodide and aggregates streamed events
+// into a single ExecutionResult, matching the response shape that
+// apiPost("/execute") returns from the FastAPI backend in dev.
+export async function runInPyodideOneShot(code: string): Promise<ExecutionResult> {
+  const result: ExecutionResult = {
+    stdout: "",
+    stderr: "",
+    error: null,
+    execution_time_ms: 0,
+    metrics: {},
+    plots: [],
+    tensors: [],
+  };
+
+  await new Promise<void>((resolve) => {
+    runInPyodide(code, {
+      onStdout: (line) => {
+        result.stdout += line + "\n";
+      },
+      onStderr: (line) => {
+        result.stderr += line + "\n";
+      },
+      onPlot: (raw) => {
+        const m = raw.match(PLOT_RE);
+        if (!m) return;
+        const plot: PlotData = {
+          index: parseInt(m[1]),
+          data: `data:image/png;base64,${m[2]}`,
+          format: "png",
+        };
+        result.plots.push(plot);
+      },
+      onMetric: (raw) => {
+        const m = raw.match(METRIC_RE);
+        if (!m) return;
+        const val = parseFloat(m[2]);
+        result.metrics[m[1]] = isNaN(val) ? m[2] : val;
+      },
+      onTensor: (raw) => {
+        const m = raw.match(TENSOR_RE);
+        if (!m) return;
+        try {
+          const tensor: TensorData = JSON.parse(m[1]);
+          result.tensors.push(tensor);
+        } catch {
+          /* skip malformed */
+        }
+      },
+      onError: (msg) => {
+        result.error = msg;
+      },
+      onDone: (ms) => {
+        result.execution_time_ms = ms;
+        resolve();
+      },
+    });
+  });
+
+  return result;
 }

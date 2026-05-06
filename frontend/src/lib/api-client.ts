@@ -32,9 +32,18 @@ export async function apiGetText(path: string, lang: string): Promise<string> {
 }
 
 export async function apiPost<T>(path: string, body: unknown, lang: string): Promise<T> {
-  // Note: in static builds, POST callers should route to pyodide-runner
-  // directly (see executeStream in sse-client.ts). This branch only fires
-  // for live-backend dev.
+  if (isStaticBuild() && path === "/execute" && lang === "python") {
+    const { runInPyodideOneShot } = await import("./pyodide-runner");
+    const code = (body as { code?: string }).code ?? "";
+    const result = await runInPyodideOneShot(code);
+    return result as unknown as T;
+  }
+  if (isStaticBuild() && path === "/execute" && lang === "rust") {
+    throw new Error(
+      "Rust katas are read-only on the static build. Clone the repo and run the Rust backend to execute them.",
+    );
+  }
+
   const url = `${base(lang)}${path}`;
   const res = await fetch(url, {
     method: "POST",
